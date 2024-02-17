@@ -3,13 +3,16 @@ import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import { appTheme } from "./theme.js";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Page from '../src/pages/index.jsx';
  
 function App() {
   return (
     <ThemeProvider theme={appTheme}>
       <CssBaseline enableColorScheme />
-      <Container>
-        <Box sx={{ bgcolor: '#cfe8fc', height: '50vh',width:'50vw',display:'flex'}}>Hello Ayushi!</Box>
+      <Container sx={{padding:'20px'}}>
+        <Box sx={{ height: '50vh',width:'90vw',display:'flex'}}>
+         <Page/>
+        </Box>
       </Container>
     </ThemeProvider>
   );

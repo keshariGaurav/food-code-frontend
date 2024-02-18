@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 const TextBox = (props) => {
+    const label = props.label;
     const callback = props.callback;
     const [value, setValue] = useState('');
     useEffect(() => {

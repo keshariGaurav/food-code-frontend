@@ -4,8 +4,8 @@ import { ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import Page from '../src/pages/index.jsx';
-import Login from '../src/pages/loginPage/index.jsx';
+import Page from 'src/pages/index.jsx';
+import Login from 'src/pages/loginPage/index.jsx';
 import FoodCodeProvider, { useFoodCodeContext } from './store/Context.jsx';
 
 function App() {

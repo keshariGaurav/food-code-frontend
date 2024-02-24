@@ -27,6 +27,7 @@ const CategoriesDropdown = (props) => {
             },
         });
     };
+    if (isLoading) return <></>;
 
     return <BaseDropdown data={data} formatter={formatter} handleChangeCallback={handleChange} value={value} label="Category" />;
 };

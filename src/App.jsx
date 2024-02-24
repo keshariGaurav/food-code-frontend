@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 
 import Page from 'src/pages/index.jsx';
 import Login from 'src/pages/loginPage/index.jsx';
+import CreateMenu from 'src/pages/createMenu/index.jsx';
 import FoodCodeProvider, { useFoodCodeContext } from './store/Context.jsx';
 
 function App() {
@@ -13,12 +14,9 @@ function App() {
         <ThemeProvider theme={appTheme}>
             <CssBaseline enableColorScheme />
             <FoodCodeProvider>
-                <Container sx={{ padding: '20px' }}>
-                    <Box sx={{ height: '50vh', width: '90vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Page />
-                        <Login />
-                    </Box>
-                </Container>
+                <Box sx={{ width: '100vw', minHeight: '100vh', bgcolor: 'white' }}>
+                    <CreateMenu />
+                </Box>
             </FoodCodeProvider>
         </ThemeProvider>
     );

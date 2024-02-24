@@ -3,6 +3,12 @@ import { createContext, useReducer, useContext } from 'react';
 export const initialState = {
     name: 'hello',
     price: 100,
+    categories: [],
+    menuItem: {
+        name: '',
+        price: 1,
+        category: null,
+    },
 };
 export const foodCodeReducer = (state, action) => {
     switch (action.type) {
@@ -11,6 +17,14 @@ export const foodCodeReducer = (state, action) => {
             let newState = { ...state };
             for (let [key, value] of Object.entries(payload)) {
                 newState[key] = value;
+            }
+            return newState;
+        }
+        case 'create-menu-item': {
+            const payload = action.payload;
+            let newState = { ...state };
+            for (let [key, value] of Object.entries(payload)) {
+                newState.menuItem[key] = value;
             }
             return newState;
         }

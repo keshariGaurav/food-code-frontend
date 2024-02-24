@@ -3,11 +3,12 @@ import NumericFormatCustom from 'src/components/helper/NumericFormatCustom';
 import TextField from '@mui/material/TextField';
 const PriceField = (props) => {
     const callback = props.callback;
-    const [value, setValue] = useState(null);
+    const key = props.keyName;
+    const [value, setValue] = useState(props.value ?? null);
 
     useEffect(() => {
         if (callback) {
-            callback(value);
+            callback(key, value);
         }
     }, [value]);
 

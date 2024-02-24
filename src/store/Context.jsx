@@ -8,6 +8,7 @@ export const initialState = {
         name: '',
         price: 1,
         category: null,
+        image: [],
     },
 };
 export const foodCodeReducer = (state, action) => {

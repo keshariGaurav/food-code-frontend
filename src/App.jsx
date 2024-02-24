@@ -16,7 +16,7 @@ function App() {
                 <Container sx={{ padding: '20px' }}>
                     <Box sx={{ height: '50vh', width: '90vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Page />
-                        <Login />
+                        {/* <Login /> */}
                     </Box>
                 </Container>
             </FoodCodeProvider>

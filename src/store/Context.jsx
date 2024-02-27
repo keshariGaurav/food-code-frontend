@@ -9,6 +9,13 @@ export const initialState = {
         price: 1,
         category: null,
         image: [],
+        addonItems: [
+            {
+                name: 'drink',
+                Selection: 'single',
+                items: [],
+            },
+        ],
     },
 };
 export const foodCodeReducer = (state, action) => {

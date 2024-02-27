@@ -29,6 +29,16 @@ export const appTheme = createTheme({
             },
           },
         },
+        {
+          props: { variant: 'newAddon' },
+          style: {
+            border:'1px dotted gray',
+            color: grey[700],
+            '&:hover': {
+             cursor:'pointer'
+            },
+          },
+        },
       ],
     },
   },

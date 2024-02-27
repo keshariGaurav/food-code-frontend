@@ -8,13 +8,14 @@ const BaseDropdown = (props) => {
     const label = props.label ?? 'Select';
     const selectedValue = props.value ?? null;
     const data = props.data ?? [];
+    const keyName = props.keyName ?? '';
     const formatter = props.formatter;
     const handleChangeCallback = props.handleChangeCallback;
     const [formattedData, setFormattedData] = useState([]);
 
     const handleChange = (event) => {
         if (handleChangeCallback) {
-            handleChangeCallback(event.target.value);
+            handleChangeCallback(keyName, event.target.value);
         }
     };
     useEffect(() => {
@@ -23,7 +24,7 @@ const BaseDropdown = (props) => {
     }, [data]);
 
     return (
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, minWidth: 240 }}>
             <InputLabel id="demo-simple-select-label">{label}</InputLabel>
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={selectedValue} onChange={handleChange}>
                 {formattedData.map((item) => (

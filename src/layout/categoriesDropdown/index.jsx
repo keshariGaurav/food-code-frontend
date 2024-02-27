@@ -19,7 +19,7 @@ const CategoriesDropdown = (props) => {
         return [];
     };
 
-    const handleChange = (value) => {
+    const handleChange = (key, value) => {
         dispatch({
             type: createMenuItem,
             payload: {
@@ -27,8 +27,8 @@ const CategoriesDropdown = (props) => {
             },
         });
     };
-    if (isLoading) return <></>;
+    if (isLoading || error) return <></>;
 
-    return <BaseDropdown data={data} formatter={formatter} handleChangeCallback={handleChange} value={value} label="Category" />;
+    return <BaseDropdown data={data} formatter={formatter} keyName="category" handleChangeCallback={handleChange} value={value} label="Category" />;
 };
 export default CategoriesDropdown;

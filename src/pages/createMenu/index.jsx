@@ -4,8 +4,13 @@ import Stack from '@mui/material/Stack';
 import BackButton from 'src/components/buttons/backButton';
 import NamePriceFieldWrapper from 'src/layout/namePriceWrapper';
 import CategoriesDropdown from 'src/layout/categoriesDropdown';
+import NewAddon from 'src/components/buttons/newAddon';
+import AddOnItemsWrapper from 'src/layout/addOnItemsWrapper';
 import UploadImage from 'src/components/uploadImage';
 import RadioGroups from 'src/components/radioGroups';
+import Divider from '@mui/material/Divider';
+import AddonModal from 'src/components/modals/AddonModal';
+
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
 const CreateMenu = (props) => {
@@ -60,6 +65,13 @@ const CreateMenu = (props) => {
                 <UploadImage callback={handleUpload} value={image} />
                 <RadioGroups label="Special Tags" data={tags} callback={handleTags} value={tagValue} />
             </Stack>
+            <Divider sx={{ marginTop: '48px' }} textAlign="left">
+                Selections
+            </Divider>
+            <Box sx={{ marginY: '32px', display: 'flex', justifyContent: 'center' }}>
+                <AddonModal />
+            </Box>
+            {/* <AddOnItemsWrapper /> */}
         </Box>
     );
 };

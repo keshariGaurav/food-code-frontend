@@ -1,11 +1,14 @@
+import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import { Typography } from '@mui/material';
 import FormLabel from '@mui/material/FormLabel';
-import { useState, useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 const RadioGroups = (props) => {
+    const theme = useTheme();
     const { label, data } = props;
     const defaultValue = props.value ?? null;
     const callback = props.callback;
@@ -23,8 +26,10 @@ const RadioGroups = (props) => {
 
     return (
         <FormControl>
-            <FormLabel id="demo-row-radio-buttons-group-label" sx={{ color: 'gray', marginBottom: '8px' }}>
-                {label}
+            <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginBottom: '8px' }}>
+                <Typography variant="h2" color={theme.palette.grey['700']}>
+                    {label}
+                </Typography>
             </FormLabel>
             <RadioGroup
                 row
@@ -40,7 +45,7 @@ const RadioGroups = (props) => {
                             control={
                                 <Radio
                                     sx={{
-                                        color: 'gray',
+                                        color: `${theme.palette.grey['700']}`,
                                         '&.Mui-checked': {
                                             color: 'white',
                                         },
@@ -49,8 +54,8 @@ const RadioGroups = (props) => {
                             }
                             label={el.label}
                             sx={{
-                                borderColor: selectedValue === el.value ? 'green' : 'grey',
-                                backgroundColor: selectedValue === el.value ? 'green' : 'white',
+                                borderColor: selectedValue === el.value ? `${theme.palette.primary.dark}` : `${theme.palette.grey['700']}`,
+                                backgroundColor: selectedValue === el.value ? `${theme.palette.primary.main}` : 'white',
                                 border: '1px solid',
                                 borderRadius: '5px',
                                 display: 'flex',
@@ -58,7 +63,7 @@ const RadioGroups = (props) => {
                                 alignItems: 'center',
                                 width: '250px',
                                 margin: '2px',
-                                color: selectedValue === el.value ? 'white' : 'black',
+                                color: selectedValue === el.value ? 'white' : `${theme.palette.grey['700']}`,
                             }}
                         />
                     );

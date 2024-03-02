@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PropTypes from 'prop-types';
 const BackButton = (props) => {
@@ -9,7 +10,7 @@ const BackButton = (props) => {
     };
     return (
         <Button variant="backButton" startIcon={<ArrowBackIcon />} onClick={handler}>
-            BACK
+            <Typography variant="h4">BACK</Typography>
         </Button>
     );
 };

@@ -17,7 +17,7 @@ const NamePriceFieldWrapper = (props) => {
     };
 
     return (
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
+        <Stack alignItems="end" direction="row" spacing={2} sx={{ width: '100%' }}>
             <TextBox callback={updateValues} value={pageState.menuItem.name} keyName="name" />
             <PriceField callback={updateValues} value={pageState.menuItem.price} keyName="price" />
         </Stack>

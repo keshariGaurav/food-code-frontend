@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -26,10 +27,16 @@ const BaseDropdown = (props) => {
     return (
         <FormControl sx={{ m: 1, minWidth: 240 }}>
             <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={selectedValue} onChange={handleChange}>
+            <Select
+                sx={{ backgroundColor: '#f5f5f5' }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedValue}
+                onChange={handleChange}
+            >
                 {formattedData.map((item) => (
                     <MenuItem key={item.value} value={item.value}>
-                        {item.label}
+                        <Typography variant="h3">{item.label}</Typography>
                     </MenuItem>
                 ))}
             </Select>

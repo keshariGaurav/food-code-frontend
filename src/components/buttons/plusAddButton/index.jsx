@@ -1,6 +1,9 @@
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import { useTheme } from '@mui/material/styles';
+
 const PlusAddButton = (props) => {
+    const theme = useTheme();
     const callback = props.callback;
     const handleClick = () => {
         if (callback) {
@@ -13,13 +16,16 @@ const PlusAddButton = (props) => {
             size="large"
             onClick={handleClick}
             sx={{
-                backgroundColor: 'green',
+                backgroundColor: `${theme.palette.primary.main}`,
                 borderRadius: '50%',
                 width: 40,
                 height: 40,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                '&:hover': {
+                    backgroundColor: `${theme.palette.primary.dark}`,
+                },
             }}
         >
             <AddIcon fontSize="inherit" />

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import MenusDropdown from 'src/layout/menusDropdown';
+import TextBox from 'src/components/inputGroups/textBox';
 import PriceField from 'src/components/inputGroups/priceField';
 import PlusAddButton from 'src/components/buttons/plusAddButton';
-import Box from '@mui/material/Box';
+import { Box, Stack } from '@mui/material';
 
 const AddOnItems = (props) => {
     const callback = props.callback;
@@ -27,11 +27,11 @@ const AddOnItems = (props) => {
     };
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <MenusDropdown handleChange={handleChange} value={item.sidekick} keyName="sidekick" />
+        <Stack direction="row" gap={4} sx={{ display: 'flex', alignItems: 'center' }}>
+            <TextBox callback={handleChange} value={item.sidekick} keyName="sidekick" />
             <PriceField keyName="price" value={item.price} callback={handleChange} />
             <PlusAddButton callback={handleAddItem} />
-        </Box>
+        </Stack>
     );
 };
 export default AddOnItems;

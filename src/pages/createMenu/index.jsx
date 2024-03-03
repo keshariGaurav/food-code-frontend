@@ -33,6 +33,16 @@ const CreateMenu = (props) => {
             value: 'our_special',
         },
     ];
+    const toggleValue = [
+        {
+            label: 'Required',
+            value: 'required',
+        },
+        {
+            label: 'Optional',
+            value: 'optional',
+        },
+    ];
 
     const handleTags = (value) => {
         dispatch({

@@ -12,7 +12,7 @@ const TextBox = (props) => {
     const [value, setValue] = useState(props.value ?? null);
     useEffect(() => {
         if (callback) {
-            callback(key, value);
+            callback({ key: value });
         }
     }, [value]);
     return (

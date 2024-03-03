@@ -9,13 +9,7 @@ export const initialState = {
         price: 1,
         category: null,
         image: [],
-        addonItems: [
-            {
-                name: 'drink',
-                Selection: 'single',
-                items: [],
-            },
-        ],
+        addonItems: [],
     },
 };
 export const foodCodeReducer = (state, action) => {
@@ -34,6 +28,12 @@ export const foodCodeReducer = (state, action) => {
             for (let [key, value] of Object.entries(payload)) {
                 newState.menuItem[key] = value;
             }
+            return newState;
+        }
+        case 'add-addon-item': {
+            let newState = { ...state };
+            let newAddonItems = [...newState.menuItem.addonItems, action.payload];
+            newState.menuItem = { ...newState.menuItem, addonItems: newAddonItems };
             return newState;
         }
     }

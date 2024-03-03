@@ -32,7 +32,7 @@ export const foodCodeReducer = (state, action) => {
         }
         case 'add-addon-item': {
             let newState = { ...state };
-            let newAddonItems = [...newState.menuItem.addonItems, action.payload];
+            let newAddonItems = [...newState.menuItem.addonItems, action.payload.addonItems];
             newState.menuItem = { ...newState.menuItem, addonItems: newAddonItems };
             return newState;
         }

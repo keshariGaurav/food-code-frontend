@@ -1,8 +1,11 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 const Toggle = (props) => {
+    const theme = useTheme();
+
     const { toggleValue, initialValue, callback } = props;
     const [currentValue, setCurrentValue] = useState(initialValue);
 
@@ -10,7 +13,6 @@ const Toggle = (props) => {
         setCurrentValue(event.target.value);
         callback(event.target.value);
     };
-    console.log(currentValue);
     return (
         <ToggleButtonGroup
             color="primary"
@@ -20,10 +22,10 @@ const Toggle = (props) => {
             sx={{
                 '& .MuiToggleButtonGroup-grouped': {
                     '&.Mui-selected': {
-                        backgroundColor: 'green',
+                        backgroundColor: `${theme.palette.primary.main}`,
                         color: 'white',
                         '&:hover': {
-                            backgroundColor: 'darkgreen',
+                            backgroundColor: `${theme.palette.primary.dark}`,
                         },
                     },
                 },

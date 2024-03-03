@@ -6,7 +6,7 @@ import './index.css';
 
 const TextBox = (props) => {
     const theme = useTheme();
-    const label = props.label ?? 'Name';
+    const label = props.label ?? null;
     const key = props.keyName;
     const callback = props.callback;
     const [value, setValue] = useState(props.value ?? null);
@@ -17,9 +17,13 @@ const TextBox = (props) => {
     }, [value]);
     return (
         <Box width="100%">
-            <Typography marginBottom={1} variant="h2" color={theme.palette.grey['700']}>
-                {label}
-            </Typography>
+            {label ? (
+                <Typography marginBottom={1} variant="h2" color={theme.palette.grey['700']}>
+                    {label}
+                </Typography>
+            ) : (
+                <></>
+            )}
             <TextField
                 fullWidth
                 value={value}

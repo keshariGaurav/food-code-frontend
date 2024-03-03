@@ -20,11 +20,9 @@ const AddOnItemsWrapper = (props) => {
         items: [],
     });
     const handleChange = (updates) => {
-        console.log(updates);
         setAddonItems((currentAddonItems) => {
             let newState = { ...currentAddonItems };
             Object.entries(updates).forEach(([key, value]) => {
-                console.log(key, value);
                 if (key === 'items') {
                     newState.items = [...newState.items, value];
                 } else {
@@ -64,36 +62,29 @@ const AddOnItemsWrapper = (props) => {
         },
     ];
     const handleRequired = (value) => {
-        console.log(value);
         if (value === 'optional') {
-            console.log(value);
             handleChange({
                 required: false,
             });
         }
         if (value === 'required') {
-            console.log(value);
             handleChange({
                 required: true,
             });
         }
     };
     const handleOptional = (value) => {
-        console.log(value);
         if (value === 'single_selection') {
-            console.log(value);
             handleChange({
                 multiSelection: false,
             });
         }
         if (value === 'multi_selection') {
-            console.log(value);
             handleChange({
                 multiSelection: true,
             });
         }
     };
-    console.log(addonItems);
     return (
         <Box sx={{ border: '1px solid gray', padding: '12px' }}>
             <Stack spacing={4}>

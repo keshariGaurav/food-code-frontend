@@ -53,7 +53,6 @@ const Login = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     onChange={(e) => {
                         setPassword(e.target.value);
-                        console.log(password);
                     }}
                     InputProps={{
                         endAdornment: (

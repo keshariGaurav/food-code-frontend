@@ -6,7 +6,6 @@ import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 const NamePriceFieldWrapper = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
     const createMenuItem = 'create-menu-item';
-    console.log(pageState);
     const updateValues = (key, value) => {
         dispatch({
             type: createMenuItem,

@@ -9,12 +9,20 @@ const TextBox = (props) => {
     const label = props.label ?? null;
     const key = props.keyName;
     const callback = props.callback;
-    const [value, setValue] = useState(props.value ?? null);
+    const clearField = props.clearField ?? false;
+    const setClearField = props.setClearField;
+    const [value, setValue] = useState(props.value ?? '');
     useEffect(() => {
         if (callback) {
             callback(key, value);
         }
     }, [value]);
+    useEffect(() => {
+        if (clearField) {
+            setValue('');
+            setClearField(false);
+        }
+    }, [clearField]);
     return (
         <Box width="100%">
             {label ? (

@@ -3,13 +3,15 @@ import TextBox from 'src/components/inputGroups/textBox';
 import PriceField from 'src/components/inputGroups/priceField';
 import PlusAddButton from 'src/components/buttons/plusAddButton';
 import { Box, Stack } from '@mui/material';
+import AlertBar from 'src/components/alertBar';
 
 const AddOnItems = (props) => {
     const callback = props.callback;
     const keyName = props.keyName;
+    const [clearField, setClearField] = useState(false);
 
     const [item, setItem] = useState({
-        sidekick: '',
+        item: '',
         price: '',
     });
     const handleChange = (key, value) => {
@@ -19,17 +21,17 @@ const AddOnItems = (props) => {
         });
     };
     const handleAddItem = () => {
-        if (item.sidekick && item.price) callback(keyName, item);
-        setItem({
-            sidekick: '',
-            price: '',
-        });
+        if (item.item && item.price) {
+            callback(keyName, item);
+            setClearField(true);
+        } else {
+        }
     };
 
     return (
         <Stack direction="row" gap={4} sx={{ display: 'flex', alignItems: 'center' }}>
-            <TextBox callback={handleChange} value={item.sidekick} keyName="sidekick" />
-            <PriceField keyName="price" value={item.price} callback={handleChange} />
+            <TextBox callback={handleChange} value={item.item} keyName="item" setClearField={setClearField} clearField={clearField} />
+            <PriceField keyName="price" value={item.price} callback={handleChange} setClearField={setClearField} clearField={clearField} />
             <PlusAddButton callback={handleAddItem} />
         </Stack>
     );

@@ -4,6 +4,12 @@ export const initialState = {
     name: 'hello',
     price: 100,
     categories: [],
+    alertBarContent: {
+        active: false,
+        type: 'success',
+        message: '',
+    },
+
     menuItem: {
         name: '',
         price: 1,
@@ -34,6 +40,14 @@ export const foodCodeReducer = (state, action) => {
             let newState = { ...state };
             let newAddonItems = [...newState.menuItem.addonItems, action.payload.addonItems];
             newState.menuItem = { ...newState.menuItem, addonItems: newAddonItems };
+            return newState;
+        }
+        case 'create-alert': {
+            const payload = action.payload;
+            let newState = { ...state };
+            for (let [key, value] of Object.entries(payload)) {
+                newState.alertBarContent[key] = value;
+            }
             return newState;
         }
     }

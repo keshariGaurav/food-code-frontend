@@ -10,6 +10,7 @@ import UploadImage from 'src/components/uploadImage';
 import RadioGroups from 'src/components/radioGroups';
 import Divider from '@mui/material/Divider';
 import AddonModal from 'src/components/modals/AddonModal';
+import AlertBar from 'src/components/alertBar';
 
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
@@ -18,6 +19,7 @@ const CreateMenu = (props) => {
     const createMenuItem = 'create-menu-item';
     const image = pageState.menuItem?.image;
     const tagValue = pageState.menuItem.tag;
+    const alertContent = pageState.alertBarContent;
 
     const tags = [
         {
@@ -66,6 +68,7 @@ const CreateMenu = (props) => {
     };
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>
+            {alertContent.active && <AlertBar type={alertContent.type} message={alertContent.message} />}
             <Box sx={{ marginBottom: '32px' }}>
                 <BackButton callback={goToHomePage} />
             </Box>

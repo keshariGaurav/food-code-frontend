@@ -4,7 +4,9 @@ import TextField from '@mui/material/TextField';
 const PriceField = (props) => {
     const callback = props.callback;
     const key = props.keyName;
-    const defaultValue = props.value ?? null;
+    const defaultValue = props.value ?? '';
+    const clearField = props.clearField ?? false;
+    const setClearField = props.setClearField;
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -13,6 +15,13 @@ const PriceField = (props) => {
             callback(key, val);
         }
     }, [value]);
+
+    useEffect(() => {
+        if (clearField) {
+            setValue('');
+            setClearField(false);
+        }
+    }, [clearField]);
 
     return (
         <TextField

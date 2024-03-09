@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
+import { Box, Stack } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import TextBox from 'src/components/inputGroups/TextBox';
 import AddOnItems from 'src/layout/NewAddOn/AddOnItems';
 import Toggle from 'src/components/buttons/CustomToggleButton';
 import CustomRadio from 'src/components/radioGroups/CustomRadio';
 import ActionButton from 'src/components/buttons/ActionButton';
 import AddOnItemsList from 'src/layout/NewAddOn/AddOnItems/AddOnItemsList';
-import { useTheme } from '@mui/material/styles';
 
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 const NewAddOn = (props) => {

@@ -1,25 +1,32 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-export const useApi = (url,options)=>{
-    const [data,setData]=useState(null);
-    const [isLoading,setIsLoading]=useState(false);
-    const [error,setError]=useState(null);
+export const useApi = (url, method, payload) => {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState('');
+    const [loaded, setLoaded] = useState(false);
+    const controllerRef = useRef(new AbortController());
+    const cancel = () => {
+        controllerRef.current.abort();
+    };
 
-    const fetchData = async () =>{
-        setIsLoading(true);
-        try{
-            const response = await axios(url,options);
-            setData(response.data);
-        }
-        catch(error)
-        {
-            setError(error)
-        }
-        setIsLoading(false);
-    }
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.request({
+                    data: payload,
+                    signal: controllerRef.current.signal,
+                    method,
+                    url,
+                });
 
-    useEffect(()=>{
-        fetchData();
-    },[]);
-    return {data,isLoading,error};
-}
+                setData(response.data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoaded(true);
+            }
+        })();
+    }, []);
+
+    return { cancel, data, error, loaded };
+};

@@ -1,11 +1,11 @@
-import BaseDropdown from 'src/components/dropdown/baseDropdown';
+import BaseDropdown from 'src/components/dropdown/BaseDropdown';
 import { useApi } from 'src/hooks/useApi';
 
 const MenusDropdown = (props) => {
     const value = props.value;
     const handleChange = props.handleChange;
     const keyName = props.keyName;
-    const { data, isLoading, error, callApi } = useApi('http://localhost:3100/api/v1/menus', {});
+    const { cancel, data, error, loaded } = useApi('https://jsonplaceholder.typicode.com/todos/', 'get', {});
 
     const formatter = (data) => {
         const res = data?.data;
@@ -18,7 +18,7 @@ const MenusDropdown = (props) => {
         return [];
     };
 
-    if (isLoading) return <></>;
+    if (!loaded) return <></>;
     return <BaseDropdown data={data} formatter={formatter} handleChangeCallback={handleChange} keyName={keyName} value={value} label="Select" />;
 };
 export default MenusDropdown;

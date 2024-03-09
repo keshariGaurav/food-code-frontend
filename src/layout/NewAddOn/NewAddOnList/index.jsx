@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@mui/material/styles';
 
-const AddOnItemsList = (props) => {
+const NewAddOnList = (props) => {
     const theme = useTheme();
 
     const data = props.data ?? [];
@@ -37,11 +37,11 @@ const AddOnItemsList = (props) => {
                             </IconButton>
                         }
                     >
-                        <ListItemText primary={li.sidekick} secondary={`Rs. ${li.price}`} />
+                        <ListItemText primary={li.name} />
                     </ListItem>
                 );
             })}
         </List>
     );
 };
-export default AddOnItemsList;
+export default NewAddOnList;

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import TextBox from 'src/components/inputGroups/textBox';
-import AddOnItems from 'src/layout/addOnItemsWrapper/addOnItems';
-import Toggle from 'src/components/buttons/toggleButton';
-import CustomRadio from 'src/components/radioGroups/radioInput';
-import ActionButton from 'src/components/buttons/cancelSaveButton';
-import AddOnItemsList from 'src/layout/addOnItemsWrapper/addOnItemsList';
+import TextBox from 'src/components/inputGroups/TextBox';
+import AddOnItems from 'src/layout/NewAddOn/AddOnItems';
+import Toggle from 'src/components/buttons/CustomToggleButton';
+import CustomRadio from 'src/components/radioGroups/CustomRadio';
+import ActionButton from 'src/components/buttons/ActionButton';
+import AddOnItemsList from 'src/layout/NewAddOn/AddOnItems/AddOnItemsList';
 import { useTheme } from '@mui/material/styles';
 
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
-const AddOnItemsWrapper = (props) => {
+const NewAddOn = (props) => {
     const theme = useTheme();
     const { handleClose } = props;
     const { pageState, dispatch } = useFoodCodeContext();
@@ -110,11 +110,11 @@ const AddOnItemsWrapper = (props) => {
                 <AddOnItemsList data={addonItems.items} callback={handleDeleteItems} />
 
                 <Stack spacing={2} direction={'row'}>
-                    <ActionButton buttonName="Cancel" buttonColor="gray" callback={handleClose}></ActionButton>
-                    <ActionButton buttonName="Save" buttonColor="red" callback={handleSave}></ActionButton>
+                    <ActionButton buttonName="Cancel" variant="cancel" callback={handleClose}></ActionButton>
+                    <ActionButton buttonName="Save" variant="save" callback={handleSave}></ActionButton>
                 </Stack>
             </Stack>
         </Box>
     );
 };
-export default AddOnItemsWrapper;
+export default NewAddOn;

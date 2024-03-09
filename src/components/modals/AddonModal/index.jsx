@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import NewAddon from 'src/components/buttons/newAddon';
-import AddOnItemsWrapper from 'src/layout/addOnItemsWrapper';
+import NewAddon from 'src/components/buttons/NewAddOnButton';
+import AddOnItemsWrapper from 'src/layout/NewAddOn';
 import { useTheme } from '@mui/material/styles';
 
-export default function AddonModal() {
+export default function AddOnModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);

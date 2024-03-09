@@ -3,7 +3,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 
-const Toggle = (props) => {
+const CustomToggleButton = (props) => {
     const theme = useTheme();
 
     const { toggleValue, initialValue, callback } = props;
@@ -40,4 +40,4 @@ const Toggle = (props) => {
     );
 };
 
-export default Toggle;
+export default CustomToggleButton;

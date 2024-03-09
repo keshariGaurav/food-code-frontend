@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
-const BaseDropdown = (props) => {
+const BaseDropdownComponent = (props) => {
     const label = props.label ?? 'Select';
     const selectedValue = props.value ?? null;
     const data = props.data ?? [];
@@ -44,4 +44,4 @@ const BaseDropdown = (props) => {
     );
 };
 
-export default BaseDropdown;
+export default BaseDropdownComponent;

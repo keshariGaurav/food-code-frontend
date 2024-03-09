@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
-import BackButton from 'src/components/buttons/BackButton';
+import BackButton from 'src/components/buttons/BackToButton';
 import NamePriceFieldWrapper from 'src/layout/NamePriceFieldWrapper';
 import CategoriesDropdown from 'src/layout/CategoriesDropdown';
 import NewAddon from 'src/components/buttons/NewAddOnButton';

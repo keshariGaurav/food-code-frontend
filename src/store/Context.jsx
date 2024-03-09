@@ -13,9 +13,9 @@ export const initialState = {
     menuItem: {
         name: '',
         price: 1,
-        category: null,
-        image: [],
-        addonItems: [],
+        categoryId: null,
+        image: 'https://picsum.photos/200',
+        addOnItems: [],
     },
 };
 export const foodCodeReducer = (state, action) => {
@@ -38,8 +38,8 @@ export const foodCodeReducer = (state, action) => {
         }
         case 'add-addon-item': {
             let newState = { ...state };
-            let newAddonItems = [...newState.menuItem.addonItems, action.payload.addonItems];
-            newState.menuItem = { ...newState.menuItem, addonItems: newAddonItems };
+            let newAddonItems = [...newState.menuItem.addOnItems, action.payload.addOnItems];
+            newState.menuItem = { ...newState.menuItem, addOnItems: newAddonItems };
             return newState;
         }
         case 'create-alert': {

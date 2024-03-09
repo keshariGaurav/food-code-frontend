@@ -5,8 +5,8 @@ import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 const CategoriesDropdown = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
     const createMenuItem = 'create-menu-item';
-    const value = pageState.menuItem?.category;
-    const { cancel, data, error, loaded } = useApi('https://jsonplaceholder.typicode.com/todos/', 'get', {});
+    const value = pageState.menuItem?.categoryId;
+    const { cancel, data, error, loaded } = useApi('http://localhost:3100/api/v1/category', 'get', {});
 
     console.log(data);
 
@@ -25,7 +25,7 @@ const CategoriesDropdown = (props) => {
         dispatch({
             type: createMenuItem,
             payload: {
-                category: value,
+                categoryId: value,
             },
         });
     };

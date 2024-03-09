@@ -11,7 +11,7 @@ const AddOnItems = (props) => {
     const [clearField, setClearField] = useState(false);
 
     const [item, setItem] = useState({
-        item: '',
+        name: '',
         price: '',
     });
     const handleChange = (key, value) => {
@@ -21,7 +21,7 @@ const AddOnItems = (props) => {
         });
     };
     const handleAddItem = () => {
-        if (item.item && item.price) {
+        if (item.name && item.price) {
             callback(keyName, item);
             setClearField(true);
         } else {
@@ -30,7 +30,7 @@ const AddOnItems = (props) => {
 
     return (
         <Stack direction="row" gap={4} sx={{ display: 'flex', alignItems: 'center' }}>
-            <TextBox callback={handleChange} value={item.item} keyName="item" setClearField={setClearField} clearField={clearField} />
+            <TextBox callback={handleChange} value={item.name} keyName="name" setClearField={setClearField} clearField={clearField} />
             <PriceField keyName="price" value={item.price} callback={handleChange} setClearField={setClearField} clearField={clearField} />
             <PlusAddButton callback={handleAddItem} />
         </Stack>

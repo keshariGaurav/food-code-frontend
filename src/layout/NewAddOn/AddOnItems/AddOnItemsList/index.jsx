@@ -37,7 +37,7 @@ const AddOnItemsList = (props) => {
                             </IconButton>
                         }
                     >
-                        <ListItemText primary={li.item} secondary={`Rs. ${li.price}`} />
+                        <ListItemText primary={li.name} secondary={`Rs. ${li.price}`} />
                     </ListItem>
                 );
             })}

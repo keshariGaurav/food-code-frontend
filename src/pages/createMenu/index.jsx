@@ -23,7 +23,7 @@ const CreateMenu = (props) => {
     const image = pageState.menuItem?.image;
     const tagValue = pageState.menuItem.tag;
     const alertContent = pageState.alertBarContent;
-    const addOnItemsList = pageState.menuItem.addonItems ?? [];
+    const addOnItemsList = pageState.menuItem.addOnItems ?? [];
     const menuItem = pageState.menuItem;
 
     const tags = [
@@ -67,18 +67,18 @@ const CreateMenu = (props) => {
         dispatch({
             type: createMenuItem,
             payload: {
-                image: files,
+                image: 'url',
             },
         });
     };
 
     const handleDeleteForNewAddOnList = (idx) => {
-        const list = [...pageState.menuItem.addonItems];
+        const list = [...pageState.menuItem.addOnItems];
         list.splice(idx, 1);
         dispatch({
             type: createMenuItem,
             payload: {
-                addonItems: list,
+                addOnItems: list,
             },
         });
     };
@@ -87,7 +87,7 @@ const CreateMenu = (props) => {
     };
     const handleSave = async () => {
         try {
-            const response = await axios.post('/your-api-endpoint', menuItem);
+            const response = await axios.post('http://localhost:3100/api/v1/menus', menuItem);
         } catch (error) {
             console.error('Error:', error);
         }

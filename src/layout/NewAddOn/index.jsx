@@ -14,12 +14,12 @@ const NewAddOn = (props) => {
     const theme = useTheme();
     const { handleClose } = props;
     const { pageState, dispatch } = useFoodCodeContext();
-    const addOnItemsList = pageState.menuItem.addonItems;
+    const addOnItemsList = pageState.menuItem.addOnItems;
     const addOnItem = 'add-addon-item';
-    const [addonItems, setAddonItems] = useState({
+    const [addOnItems, setAddOnItems] = useState({
         name: '',
         required: false,
-        multiSelection: false,
+        multiSelect: false,
         limit: true,
         limitSize: 0,
         items: [],
@@ -45,7 +45,7 @@ const NewAddOn = (props) => {
         },
     ];
     const handleChange = (key, value) => {
-        setAddonItems((currentAddonItems) => {
+        setAddOnItems((currentAddonItems) => {
             let newState = { ...currentAddonItems };
             if (key === 'items') {
                 newState.items = [...newState.items, value];
@@ -56,7 +56,7 @@ const NewAddOn = (props) => {
         });
     };
     const handleCustomRadio = (updates) => {
-        setAddonItems((currentAddonItems) => {
+        setAddOnItems((currentAddonItems) => {
             let newState = { ...currentAddonItems };
             Object.entries(updates).forEach(([key, value]) => {
                 newState[key] = value;
@@ -68,7 +68,7 @@ const NewAddOn = (props) => {
         dispatch({
             type: addOnItem,
             payload: {
-                addonItems: addonItems,
+                addOnItems: addOnItems,
             },
         });
         handleClose();
@@ -84,16 +84,16 @@ const NewAddOn = (props) => {
     };
     const handleOptional = (value) => {
         if (value === 'single_selection') {
-            handleChange('multiSelection', false);
+            handleChange('multiSelect', false);
         }
         if (value === 'multi_selection') {
-            handleChange('multiSelection', true);
+            handleChange('multiSelect', true);
         }
     };
     const handleDeleteItems = (idx) => {
-        const items = [...addonItems.items];
+        const items = [...addOnItems.items];
         items.splice(idx, 1);
-        setAddonItems((currentAddonItems) => {
+        setAddOnItems((currentAddonItems) => {
             let newState = { ...currentAddonItems };
             newState.items = items;
             return newState;
@@ -107,7 +107,7 @@ const NewAddOn = (props) => {
                 <Toggle toggleValue={Options} initialValue={Options[0].value} callback={handleRequired}></Toggle>
                 <CustomRadio callback={handleCustomRadio}></CustomRadio>
                 <AddOnItems keyName="items" callback={handleChange} />
-                <AddOnItemsList data={addonItems.items} callback={handleDeleteItems} />
+                <AddOnItemsList data={addOnItems.items} callback={handleDeleteItems} />
 
                 <Stack spacing={2} direction={'row'}>
                     <ActionButton buttonName="Cancel" variant="cancel" callback={handleClose}></ActionButton>

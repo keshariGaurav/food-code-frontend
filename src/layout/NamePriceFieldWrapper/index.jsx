@@ -1,6 +1,6 @@
 import Stack from '@mui/material/Stack';
-import TextBox from 'src/components/inputGroups/textBox';
-import PriceField from 'src/components/inputGroups/priceField';
+import TextBox from 'src/components/inputGroups/TextBox';
+import PriceField from 'src/components/inputGroups/PriceField';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
 const NamePriceFieldWrapper = (props) => {

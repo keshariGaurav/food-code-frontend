@@ -2,7 +2,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '@mui/material/styles';
 
-const PlusAddButton = (props) => {
+const PlusAddOnButton = (props) => {
     const theme = useTheme();
     const callback = props.callback;
     const handleClick = () => {
@@ -32,4 +32,4 @@ const PlusAddButton = (props) => {
         </IconButton>
     );
 };
-export default PlusAddButton;
+export default PlusAddOnButton;

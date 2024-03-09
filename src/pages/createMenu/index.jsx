@@ -1,16 +1,19 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
-import BackButton from 'src/components/buttons/backButton';
-import NamePriceFieldWrapper from 'src/layout/namePriceWrapper';
-import CategoriesDropdown from 'src/layout/categoriesDropdown';
-import NewAddon from 'src/components/buttons/newAddon';
-import AddOnItemsWrapper from 'src/layout/addOnItemsWrapper';
-import UploadImage from 'src/components/uploadImage';
+import BackButton from 'src/components/buttons/BackButton';
+import NamePriceFieldWrapper from 'src/layout/NamePriceFieldWrapper';
+import CategoriesDropdown from 'src/layout/CategoriesDropdown';
+import NewAddon from 'src/components/buttons/NewAddOnButton';
+import AddOnItemsWrapper from 'src/layout/NewAddOn';
+import UploadImage from 'src/components/UploadImage';
 import RadioGroups from 'src/components/radioGroups';
 import Divider from '@mui/material/Divider';
-import AddonModal from 'src/components/modals/AddonModal';
+import AddonModal from 'src/components/modals/AddOnModal';
 import AlertBar from 'src/components/alertBar';
+import NewAddOnList from 'src/layout/NewAddOn/NewAddOnList';
+import ActionButton from 'src/components/buttons/ActionButton';
+import axios from 'axios';
 
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
@@ -20,6 +23,8 @@ const CreateMenu = (props) => {
     const image = pageState.menuItem?.image;
     const tagValue = pageState.menuItem.tag;
     const alertContent = pageState.alertBarContent;
+    const addOnItemsList = pageState.menuItem.addonItems ?? [];
+    const menuItem = pageState.menuItem;
 
     const tags = [
         {
@@ -66,6 +71,27 @@ const CreateMenu = (props) => {
             },
         });
     };
+
+    const handleDeleteForNewAddOnList = (idx) => {
+        const list = [...pageState.menuItem.addonItems];
+        list.splice(idx, 1);
+        dispatch({
+            type: createMenuItem,
+            payload: {
+                addonItems: list,
+            },
+        });
+    };
+    const handleClose = () => {
+        // Will be implemented after setting up router
+    };
+    const handleSave = async () => {
+        try {
+            const response = await axios.post('/your-api-endpoint', menuItem);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>
             {alertContent.active && <AlertBar type={alertContent.type} message={alertContent.message} />}
@@ -84,7 +110,11 @@ const CreateMenu = (props) => {
             <Box sx={{ marginY: '32px', display: 'flex', justifyContent: 'center' }}>
                 <AddonModal />
             </Box>
-            {/* <AddOnItemsWrapper /> */}
+            <NewAddOnList data={addOnItemsList} callback={handleDeleteForNewAddOnList} />
+            <Stack spacing={2} direction={'row'} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <ActionButton buttonName="Cancel" variant="cancel" callback={handleClose}></ActionButton>
+                <ActionButton buttonName="Save" variant="save" callback={handleSave}></ActionButton>
+            </Stack>
         </Box>
     );
 };

@@ -1,4 +1,4 @@
-import BaseDropdown from 'src/components/dropdown/baseDropdown';
+import BaseDropdown from 'src/components/dropdown/BaseDropdown';
 import { useApi } from 'src/hooks/useApi';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
@@ -6,7 +6,9 @@ const CategoriesDropdown = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
     const createMenuItem = 'create-menu-item';
     const value = pageState.menuItem?.category;
-    const { data, isLoading, error, callApi } = useApi('http://localhost:3100/api/v1/category', {});
+    const { cancel, data, error, loaded } = useApi('https://jsonplaceholder.typicode.com/todos/', 'get', {});
+
+    console.log(data);
 
     const formatter = (data) => {
         const res = data?.data;
@@ -27,7 +29,7 @@ const CategoriesDropdown = (props) => {
             },
         });
     };
-    if (isLoading || error) return <></>;
+    if (!loaded || error) return <></>;
 
     return <BaseDropdown data={data} formatter={formatter} keyName="category" handleChangeCallback={handleChange} value={value} label="Category" />;
 };

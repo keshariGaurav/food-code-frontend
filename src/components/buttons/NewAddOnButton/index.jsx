@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
-const NewAddon = (props) => {
+const NewAddOnButton = (props) => {
     const callback = props.callback;
     const handler = () => {
         if (props.callback) {
@@ -14,7 +14,7 @@ const NewAddon = (props) => {
         </Button>
     );
 };
-NewAddon.propTypes = {
+NewAddOnButton.propTypes = {
     callback: PropTypes.func.isRequired,
 };
-export default NewAddon;
+export default NewAddOnButton;

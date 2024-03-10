@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 
 const BaseDropdownComponent = (props) => {
     const label = props.label ?? 'Select';
-    const selectedValue = props.value ?? null;
+    const selectedValue = props.value ?? '';
     const data = props.data ?? [];
     const keyName = props.keyName ?? '';
     const formatter = props.formatter;

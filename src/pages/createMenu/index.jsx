@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
@@ -89,12 +90,20 @@ const CreateMenu = (props) => {
         try {
             const response = await axios.post('http://localhost:3100/api/v1/menus', menuItem);
         } catch (error) {
-            console.error('Error:', error);
+            const message = error?.response?.data?.message ?? 'Something went wrong! Please try again later.';
+            dispatch({
+                type: 'create-alert',
+                payload: {
+                    active: true,
+                    type: 'error',
+                    message,
+                },
+            });
         }
     };
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>
-            {alertContent.active && <AlertBar type={alertContent.type} message={alertContent.message} />}
+            <AlertBar />
             <Box sx={{ marginBottom: '32px' }}>
                 <BackButton callback={goToHomePage} />
             </Box>

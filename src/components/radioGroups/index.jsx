@@ -38,9 +38,10 @@ const RadioGroups = (props) => {
                 value={selectedValue}
                 onChange={handleChange}
             >
-                {data.map((el) => {
+                {data.map((el, idx) => {
                     return (
                         <FormControlLabel
+                            key={idx}
                             value={el.value}
                             control={
                                 <Radio

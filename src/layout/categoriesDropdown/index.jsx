@@ -8,8 +8,6 @@ const CategoriesDropdown = (props) => {
     const value = pageState.menuItem?.categoryId;
     const { cancel, data, error, loaded } = useApi('http://localhost:3100/api/v1/category', 'get', {});
 
-    console.log(data);
-
     const formatter = (data) => {
         const res = data?.data;
         if (res?.categories) {

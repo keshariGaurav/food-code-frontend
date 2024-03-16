@@ -13,9 +13,8 @@ const UploadImage = (props) => {
     const [files, setFiles] = useState(image);
 
     const handleChange = (e) => {
-        setFiles((prevFiles) => {
-            return [...prevFiles, ...Array.from(e.target.files)];
-        });
+        console.log(e.target.files);
+        setFiles(e.target.files[0]);
     };
     useEffect(() => {
         if (callback) {

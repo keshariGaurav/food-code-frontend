@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const BackToButton = (props) => {
     const handler = (e) => {
         if (props.callback) {
-            callback(e);
+            props.callback(e);
         }
     };
     return (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { useNavigate } from 'react-router-dom';
 
 import BackButton from 'src/components/buttons/BackToButton';
 import NamePriceFieldWrapper from 'src/layout/NamePriceFieldWrapper';
@@ -26,6 +27,7 @@ const CreateMenu = (props) => {
     const alertContent = pageState.alertBarContent;
     const addOnItemsList = pageState.menuItem.addOnItems ?? [];
     const menuItem = pageState.menuItem;
+    const navigate = useNavigate();
 
     const tags = [
         {
@@ -63,12 +65,13 @@ const CreateMenu = (props) => {
 
     const goToHomePage = () => {
         //TODO - Function needs to implement after setting up Route Handler to handle back button behaviour.
+        navigate('/');
     };
     const handleUpload = (files) => {
         dispatch({
             type: createMenuItem,
             payload: {
-                image: 'url',
+                image: files,
             },
         });
     };
@@ -85,10 +88,29 @@ const CreateMenu = (props) => {
     };
     const handleClose = () => {
         // Will be implemented after setting up router
+        navigate('/');
     };
     const handleSave = async () => {
         try {
-            const response = await axios.post('http://localhost:3100/api/v1/menus', menuItem);
+            const formData = new FormData();
+            formData.append('name', menuItem.name);
+            formData.append('price', menuItem.price);
+            formData.append('categoryId', menuItem.categoryId);
+            formData.append('tag', menuItem.tag);
+            if (menuItem.image) {
+                formData.append('image', menuItem.image);
+            }
+            if (menuItem.addOnItems && menuItem.addOnItems.length > 0) {
+                menuItem.addOnItems.forEach((item, index) => {
+                    formData.append(`addOnItems[${index}]`, JSON.stringify(item));
+                });
+            }
+            const response = await axios.post('http://localhost:3100/api/v1/menus', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log(response.data);
         } catch (error) {
             const message = error?.response?.data?.message ?? 'Something went wrong! Please try again later.';
             dispatch({
@@ -101,6 +123,7 @@ const CreateMenu = (props) => {
             });
         }
     };
+
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>
             <AlertBar />

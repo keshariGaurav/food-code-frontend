@@ -14,7 +14,7 @@ export const initialState = {
         name: '',
         price: 1,
         categoryId: null,
-        image: 'https://picsum.photos/200',
+        image: null,
         addOnItems: [],
     },
 };

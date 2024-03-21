@@ -104,7 +104,6 @@ const CreateMenu = (props) => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data);
         } catch (error) {
             const message = error?.response?.data?.message ?? 'Something went wrong! Please try again later.';
             dispatch({

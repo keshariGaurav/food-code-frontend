@@ -97,20 +97,13 @@ const CreateMenu = (props) => {
             formData.append('price', menuItem.price);
             formData.append('categoryId', menuItem.categoryId);
             formData.append('tag', menuItem.tag);
-            if (menuItem.image) {
-                formData.append('image', menuItem.image);
-            }
-            if (menuItem.addOnItems && menuItem.addOnItems.length > 0) {
-                menuItem.addOnItems.forEach((item, index) => {
-                    formData.append(`addOnItems[${index}]`, JSON.stringify(item));
-                });
-            }
+            formData.append('image', menuItem.image);
+            formData.append('addOnItems', JSON.stringify(menuItem.addOnItems));
             const response = await axios.post('http://localhost:3100/api/v1/menus', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data);
         } catch (error) {
             const message = error?.response?.data?.message ?? 'Something went wrong! Please try again later.';
             dispatch({

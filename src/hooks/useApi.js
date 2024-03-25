@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-export const useApi = (url, method, payload) => {
+export const useApi = (url, method, payload, refresh = false) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState('');
     const [loaded, setLoaded] = useState(false);
@@ -26,7 +26,7 @@ export const useApi = (url, method, payload) => {
                 setLoaded(true);
             }
         })();
-    }, []);
+    }, [refresh]);
 
     return { cancel, data, error, loaded };
 };

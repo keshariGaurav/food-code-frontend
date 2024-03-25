@@ -9,6 +9,7 @@ export const initialState = {
         type: 'success',
         message: '',
     },
+    refreshAllMenuItems: false,
 
     menuItem: {
         name: '',

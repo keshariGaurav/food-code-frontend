@@ -1,41 +1,34 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Stack, IconButton, Switch, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
-import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
+import { useNavigate } from 'react-router-dom'; // Step 1: Import useNavigate
+import DeleteModal from 'src/components/modals/DeleteModal';
 
 const MenuItemWrapper = (props) => {
-    const { pageState, dispatch } = useFoodCodeContext();
-
-    const menu = props.menu;
-    const name = menu.name;
-    const price = menu.price;
-    const handleEdit = props.handleEdit;
-    const id = menu._id;
-    const [checked, setChecked] = useState(menu.available);
+    const { menu, handleEdit } = props;
+    const { _id: id, name, price, available } = menu;
+    const [checked, setChecked] = useState(available);
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const handleToggle = async (event) => {
         setChecked(event.target.checked);
-        const response = await axios.post(`http://localhost:3100/api/v1/menus/available/${id}`, {
+        await axios.post(`http://localhost:3100/api/v1/menus/available/${id}`, {
             available: event.target.checked,
-        });
-        dispatch({
-            type: 'update-root',
-            payload: {
-                refreshAllMenuItems: !pageState.refreshAllMenuItems,
-            },
         });
     };
 
-    const handleDelete = async (event) => {
-        const response = await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
-        dispatch({
-            type: 'update-root',
-            payload: {
-                refreshAllMenuItems: !pageState.refreshAllMenuItems,
-            },
-        });
+    const handleDelete = async () => {
+        await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
+        handleClose();
+    };
+
+    const handleEditClick = () => {
+        navigate(`/create-menu/${id}`);
     };
 
     return (
@@ -44,19 +37,18 @@ const MenuItemWrapper = (props) => {
                 <Typography variant="h3">{name}</Typography>
                 <Typography variant="h3">{`Rs. ${price}`}</Typography>
             </Stack>
-            <Stack direction="row" width="25%" display="flex" justifyContent="space-between">
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <IconButton aria-label="delete" size="large" onClick={handleDelete}>
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label="edit" size="large">
-                        <EditIcon />
-                    </IconButton>
-                </Box>
-
+            <Stack direction="row" width="25%" justifyContent="space-between">
+                <IconButton aria-label="delete" size="large" onClick={handleOpen}>
+                    <DeleteIcon />
+                </IconButton>
+                <IconButton aria-label="edit" size="large" onClick={handleEditClick}>
+                    <EditIcon />
+                </IconButton>
                 <Switch checked={checked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} />
             </Stack>
+            <DeleteModal open={open} handleClose={handleClose} handleDelete={handleDelete} />
         </Box>
     );
 };
+
 export default MenuItemWrapper;

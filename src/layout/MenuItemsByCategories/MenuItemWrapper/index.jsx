@@ -3,11 +3,11 @@ import { Box, Stack, IconButton, Switch, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Step 1: Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import DeleteModal from 'src/components/modals/DeleteModal';
 
 const MenuItemWrapper = (props) => {
-    const { menu, handleEdit } = props;
+    const { menu, removeItemFromList, categoryId } = props;
     const { _id: id, name, price, available } = menu;
     const [checked, setChecked] = useState(available);
     const [open, setOpen] = useState(false);
@@ -24,6 +24,7 @@ const MenuItemWrapper = (props) => {
 
     const handleDelete = async () => {
         await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
+        removeItemFromList(categoryId.categoryId, id);
         handleClose();
     };
 

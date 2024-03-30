@@ -17,6 +17,24 @@ const MenuItemsByCategories = () => {
             setCategories(data.data);
         }
     }, [data, loaded, isLoading]);
+
+    const removeItemFromList = (categoryId, menuId) => {
+        setIsLoading(true);
+        setCategories((currentCategories) => {
+            const updatedCategories = currentCategories
+                .map((category) => {
+                    if (category._id.categoryId !== categoryId) return category;
+                    const updatedMenus = category.menus.filter((menu) => menu._id !== menuId);
+                    return { ...category, menus: updatedMenus };
+                })
+                .filter((category) => category.menus.length > 0);
+
+            return updatedCategories;
+        });
+        setIsLoading(false);
+        console.log(categoryId);
+        console.log(menuId);
+    };
     if (isLoading) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
@@ -24,13 +42,15 @@ const MenuItemsByCategories = () => {
             </Box>
         );
     }
+    console.log(categories);
+    console.log(categories);
     return (
         <>
             <Box minHeight="100vh" backgroundColor={`${theme.palette.grey['200']}`}>
                 {categories.map((category) => {
                     return (
                         <Box marginBottom="12px">
-                            <CategoriesWrapper category={category} />
+                            <CategoriesWrapper category={category} removeItemFromList={removeItemFromList} />
                         </Box>
                     );
                 })}

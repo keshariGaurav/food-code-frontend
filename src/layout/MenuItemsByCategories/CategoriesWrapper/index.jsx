@@ -4,7 +4,8 @@ import MenuItemWrapper from 'src/layout/MenuItemsByCategories/MenuItemWrapper';
 const CategoriesWrapper = (props) => {
     const category = props.category;
     const menus = category.menus;
-    const removeItemFromList = props.removeItemFromList;
+    const setCategories = props.setCategories;
+    const setIsLoading = props.setIsLoading;
     return (
         <>
             <Box
@@ -17,7 +18,7 @@ const CategoriesWrapper = (props) => {
                     {menus.map((menu, idx) => {
                         return (
                             <Box>
-                                <MenuItemWrapper menu={menu} removeItemFromList={removeItemFromList} categoryId={category._id} />
+                                <MenuItemWrapper menu={menu} setCategories={setCategories} setIsLoading={setIsLoading} />
                                 {idx != menus.length - 1 && <Divider sx={{ marginTop: '15px' }} variant="middle" />}
                             </Box>
                         );

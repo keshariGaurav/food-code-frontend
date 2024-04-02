@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteModal from 'src/components/modals/DeleteModal';
 
 const MenuItemWrapper = (props) => {
-    const { menu, removeItemFromList, categoryId } = props;
+    const { menu, setCategories, setIsLoading } = props;
     const { _id: id, name, price, available } = menu;
     const [checked, setChecked] = useState(available);
     const [open, setOpen] = useState(false);
@@ -23,9 +23,18 @@ const MenuItemWrapper = (props) => {
     };
 
     const handleDelete = async () => {
-        await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
-        removeItemFromList(categoryId.categoryId, id);
         handleClose();
+        setIsLoading(true);
+        try {
+            await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
+            const response = await axios.get('http://localhost:3100/api/v1/menus/category');
+            console.log(response.data.data);
+            setCategories(response.data.data);
+        } catch (error) {
+            console.error('Error during API call', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleEditClick = () => {

@@ -105,6 +105,17 @@ appTheme = createTheme(appTheme, {
                         },
                     },
                 },
+                {
+                    props: { variant: 'success' },
+                    style: {
+                        color: appTheme.palette.primary.contrastText,
+                        backgroundColor: appTheme.palette.primary.main,
+                        '&:hover': {
+                            cursor: 'pointer',
+                            backgroundColor: appTheme.palette.primary.dark,
+                        },
+                    },
+                },
             ],
         },
     },

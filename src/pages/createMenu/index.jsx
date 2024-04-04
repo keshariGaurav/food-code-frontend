@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
+import { CircularProgress, Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import BackButton from 'src/components/buttons/BackToButton';
 import NamePriceFieldWrapper from 'src/layout/NamePriceFieldWrapper';
@@ -28,6 +28,8 @@ const CreateMenu = (props) => {
     const addOnItemsList = pageState.menuItem.addOnItems ?? [];
     const menuItem = pageState.menuItem;
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const { id } = useParams();
 
     const tags = [
         {
@@ -99,11 +101,19 @@ const CreateMenu = (props) => {
             formData.append('tag', menuItem.tag);
             formData.append('image', menuItem.image);
             formData.append('addOnItems', JSON.stringify(menuItem.addOnItems));
-            const response = await axios.post('http://localhost:3100/api/v1/menus', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            if (id) {
+                const response = await axios.patch(`http://localhost:3100/api/v1/menus/${id}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+            } else {
+                const response = await axios.post('http://localhost:3100/api/v1/menus', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+            }
         } catch (error) {
             const message = error?.response?.data?.message ?? 'Something went wrong! Please try again later.';
             dispatch({
@@ -116,6 +126,42 @@ const CreateMenu = (props) => {
             });
         }
     };
+    useEffect(() => {
+        const fetchMenuItem = async () => {
+            if (id) {
+                setIsLoading(true);
+                try {
+                    const response = await axios.get(`http://localhost:3100/api/v1/menus/${id}`);
+                    const menuItem = response.data.data.menuItem;
+                    const { name, price, categoryId, image, addOnItems } = menuItem;
+                    dispatch({
+                        type: createMenuItem,
+                        payload: {
+                            name,
+                            price,
+                            categoryId,
+                            image,
+                            addOnItems,
+                        },
+                    });
+                } catch (error) {
+                    console.error('Failed to fetch menu item:', error);
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        fetchMenuItem();
+    }, [id, dispatch]);
+
+    if (isLoading) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <CircularProgress />
+            </Box>
+        );
+    }
 
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>

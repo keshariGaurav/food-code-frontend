@@ -40,7 +40,7 @@ appTheme = createTheme(appTheme, {
         },
         h2: {
             fontSize: '2.0rem',
-            fontWeight: 600,
+            fontWeight: 500,
         },
         h3: {
             fontSize: '1.8rem',
@@ -52,7 +52,7 @@ appTheme = createTheme(appTheme, {
         },
         h4: {
             fontSize: '1.4rem',
-            fontWeight: 400,
+            fontWeight: 200,
         },
         h5: {
             fontSize: '1.2rem',

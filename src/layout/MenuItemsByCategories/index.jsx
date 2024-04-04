@@ -27,7 +27,7 @@ const MenuItemsByCategories = () => {
     }
     return (
         <>
-            <Box minHeight="100vh" backgroundColor={`${theme.palette.grey['200']}`}>
+            <Box minHeight="100vh" paddingY="32px" backgroundColor={`${theme.palette.grey['200']}`}>
                 {categories.map((category) => {
                     return (
                         <Box marginBottom="12px">

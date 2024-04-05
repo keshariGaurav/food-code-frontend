@@ -42,21 +42,23 @@ const MenuItemWrapper = (props) => {
     };
 
     return (
-        <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Stack spacing={1}>
-                <Typography variant="h3">{name}</Typography>
-                <Typography variant="h3">{`Rs. ${price}`}</Typography>
-            </Stack>
-            <Stack direction="row" width="25%" justifyContent="space-between">
-                <IconButton aria-label="delete" size="large" onClick={handleOpen}>
-                    <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="edit" size="large" onClick={handleEditClick}>
-                    <EditIcon />
-                </IconButton>
-                <Switch checked={checked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} />
-            </Stack>
+        <Box>
             <DeleteModal open={open} handleClose={handleClose} handleDelete={handleDelete} />
+            <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Stack spacing={1}>
+                    <Typography variant="h3">{name}</Typography>
+                    <Typography variant="h3">{`Rs. ${price}`}</Typography>
+                </Stack>
+                <Stack direction="row" width="25%" justifyContent="space-between">
+                    <IconButton aria-label="delete" size="large" onClick={handleOpen}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="edit" size="large" onClick={handleEditClick}>
+                        <EditIcon />
+                    </IconButton>
+                    <Switch checked={checked} onChange={handleToggle} inputProps={{ 'aria-label': 'controlled' }} />
+                </Stack>
+            </Box>
         </Box>
     );
 };

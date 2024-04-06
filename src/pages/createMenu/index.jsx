@@ -24,7 +24,6 @@ const CreateMenu = (props) => {
     const createMenuItem = 'create-menu-item';
     const image = pageState.menuItem?.image;
     const tagValue = pageState.menuItem.tag;
-    const alertContent = pageState.alertBarContent;
     const addOnItemsList = pageState.menuItem.addOnItems ?? [];
     const menuItem = pageState.menuItem;
     const navigate = useNavigate();
@@ -73,7 +72,7 @@ const CreateMenu = (props) => {
         dispatch({
             type: createMenuItem,
             payload: {
-                image: files,
+                image: 'https://source.unsplash.com/random/900×700/?fruit',
             },
         });
     };
@@ -94,23 +93,25 @@ const CreateMenu = (props) => {
     };
     const handleSave = async () => {
         try {
-            const formData = new FormData();
-            formData.append('name', menuItem.name);
-            formData.append('price', menuItem.price);
-            formData.append('categoryId', menuItem.categoryId);
-            formData.append('tag', menuItem.tag);
-            formData.append('image', menuItem.image);
-            formData.append('addOnItems', JSON.stringify(menuItem.addOnItems));
             if (id) {
-                const response = await axios.patch(`http://localhost:3100/api/v1/menus/${id}`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
+                const response = await axios.patch(`http://localhost:3100/api/v1/menus/${id}`, menuItem);
+                console.log(response);
+                dispatch({
+                    type: 'create-alert',
+                    payload: {
+                        active: true,
+                        type: 'success',
+                        message: 'Successfully Updated!',
                     },
                 });
             } else {
-                const response = await axios.post('http://localhost:3100/api/v1/menus', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
+                const response = await axios.post('http://localhost:3100/api/v1/menus', menuItem);
+                dispatch({
+                    type: 'create-alert',
+                    payload: {
+                        active: true,
+                        type: 'success',
+                        message: 'Successfully Created!',
                     },
                 });
             }
@@ -133,7 +134,7 @@ const CreateMenu = (props) => {
                 try {
                     const response = await axios.get(`http://localhost:3100/api/v1/menus/${id}`);
                     const menuItem = response.data.data.menuItem;
-                    const { name, price, categoryId, image, addOnItems } = menuItem;
+                    const { name, price, categoryId, image, addOnItems, tag } = menuItem;
                     dispatch({
                         type: createMenuItem,
                         payload: {
@@ -142,6 +143,7 @@ const CreateMenu = (props) => {
                             categoryId,
                             image,
                             addOnItems,
+                            tag,
                         },
                     });
                 } catch (error) {
@@ -184,7 +186,7 @@ const CreateMenu = (props) => {
             <NewAddOnList data={addOnItemsList} callback={handleDeleteForNewAddOnList} />
             <Stack spacing={2} direction={'row'} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <ActionButton buttonName="Cancel" variant="cancel" callback={handleClose}></ActionButton>
-                <ActionButton buttonName="Save" variant="save" callback={handleSave}></ActionButton>
+                <ActionButton buttonName={id ? 'Update' : 'Save'} variant="save" callback={handleSave}></ActionButton>
             </Stack>
         </Box>
     );

@@ -28,9 +28,9 @@ const MenuItemsByCategories = () => {
     return (
         <>
             <Box minHeight="100vh" paddingY="32px" backgroundColor={`${theme.palette.grey['200']}`}>
-                {categories.map((category) => {
+                {categories.map((category, idx) => {
                     return (
-                        <Box marginBottom="12px">
+                        <Box marginBottom="12px" key={idx}>
                             <CategoriesWrapper category={category} setCategories={setCategories} setIsLoading={setIsLoading} />
                         </Box>
                     );

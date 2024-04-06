@@ -11,10 +11,12 @@ const UploadImage = (props) => {
     const callback = props.callback;
     const image = props.value ?? [];
     const [files, setFiles] = useState(image);
+    const [imageUrl, setImageUrl] = useState(image);
 
     const handleChange = (e) => {
-        console.log(e.target.files);
-        setFiles(e.target.files[0]);
+        const file = e.target.files[0];
+        setFiles(file);
+        setImageUrl(URL.createObjectURL(file));
     };
     useEffect(() => {
         if (callback) {
@@ -23,7 +25,7 @@ const UploadImage = (props) => {
     }, [files]);
 
     return (
-        <Box sx={{ width: '150px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Input accept="image/*" id="contained-button-file" multiple type="file" sx={{ display: 'none' }} onChange={handleChange} />
             <label htmlFor="contained-button-file">
                 <Box sx={{ marginBottom: '8px' }}>
@@ -34,7 +36,7 @@ const UploadImage = (props) => {
                 <Button
                     variant="outlined"
                     component="span"
-                    startIcon={<AddPhotoAlternateTwoToneIcon />}
+                    startIcon={!imageUrl && <AddPhotoAlternateTwoToneIcon />}
                     sx={{
                         color: 'gray',
                         borderColor: 'gray',
@@ -46,7 +48,9 @@ const UploadImage = (props) => {
                         justifyContent: 'center',
                         height: '40px',
                     }}
-                />
+                >
+                    {imageUrl ? <img src={imageUrl} alt="Uploaded" style={{ maxHeight: '100%', maxWidth: '100%', marginRight: '5px' }} /> : <></>}
+                </Button>
             </label>
         </Box>
     );

@@ -14,13 +14,14 @@ export default function DeleteModal(props) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '30vw',
-        height: '8vw',
+        width: 'max-content',
+        height: 'max-content',
         bgcolor: 'background.paper',
         border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '5px',
         boxShadow: 24,
-        p: 4,
+        paddingX: 8,
+        paddingY: 4,
     };
 
     return (
@@ -32,8 +33,7 @@ export default function DeleteModal(props) {
                         variant="h5"
                         sx={{
                             display: 'flex',
-                            'justify-content': 'center',
-                            'align-items': 'center',
+                            justifyContent: 'center',
                         }}
                     >
                         Are you sure want to delete Item?
@@ -43,8 +43,7 @@ export default function DeleteModal(props) {
                         spacing={2}
                         sx={{
                             display: 'flex',
-                            'justify-content': 'center',
-                            'align-items': 'center',
+                            justifyContent: 'center',
                             mt: 2,
                         }}
                     >

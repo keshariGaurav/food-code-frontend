@@ -17,7 +17,7 @@ const CategoriesWrapper = (props) => {
                     <Typography variant="h2">{category.category.name}</Typography>
                     {menus.map((menu, idx) => {
                         return (
-                            <Box>
+                            <Box key={idx}>
                                 <MenuItemWrapper menu={menu} setCategories={setCategories} setIsLoading={setIsLoading} />
                                 {idx != menus.length - 1 && <Divider sx={{ marginTop: '15px' }} variant="middle" />}
                             </Box>

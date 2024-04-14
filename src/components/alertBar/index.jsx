@@ -23,6 +23,12 @@ const AlertBar = (props) => {
         }
     }, [banner]);
     if (!banner) return <></>;
-    return <Alert severity={severity}>{message}</Alert>;
+    return (
+        <div style={{ position: 'absolute', top: '100px', left: 0, right: 0, zIndex: 999 }}>
+            <Alert severity={severity} sx={{ marginX: '20px' }}>
+                {message}
+            </Alert>
+        </div>
+    );
 };
 export default AlertBar;

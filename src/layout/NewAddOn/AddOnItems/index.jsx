@@ -3,7 +3,6 @@ import TextBox from 'src/components/inputGroups/TextBox';
 import PriceField from 'src/components/inputGroups/PriceField';
 import PlusAddButton from 'src/components/buttons/PlusAddOnButton';
 import { Box, Stack } from '@mui/material';
-import AlertBar from 'src/components/alertBar';
 
 const AddOnItems = (props) => {
     const callback = props.callback;

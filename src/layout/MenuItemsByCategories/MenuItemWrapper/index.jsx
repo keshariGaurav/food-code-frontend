@@ -17,18 +17,25 @@ const MenuItemWrapper = (props) => {
 
     const handleToggle = async (event) => {
         setChecked(event.target.checked);
-        await axios.post(`http://localhost:3100/api/v1/menus/available/${id}`, {
-            available: event.target.checked,
-        });
+        await axios.post(
+            `http://localhost:3100/api/v1/menus/available/${id}`,
+            {
+                available: event.target.checked,
+            },
+            {
+                withCredentials: true,
+            }
+        );
     };
 
     const handleDelete = async () => {
         handleClose();
         setIsLoading(true);
         try {
-            await axios.delete(`http://localhost:3100/api/v1/menus/${id}`);
-            const response = await axios.get('http://localhost:3100/api/v1/menus/category');
-            console.log(response.data.data);
+            await axios.delete(`http://localhost:3100/api/v1/menus/${id}`, {}, { withCredentials: true });
+            const response = await axios.get('http://localhost:3100/api/v1/menus/category', {
+                withCredentials: true,
+            });
             setCategories(response.data.data);
         } catch (error) {
             console.error('Error during API call', error);

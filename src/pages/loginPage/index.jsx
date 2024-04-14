@@ -1,74 +1,123 @@
-import { Card, Stack, Box, TextField, IconButton, InputAdornment } from '@mui/material';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Card, Stack, Box, TextField, IconButton, InputAdornment, Link, Grid, FormControlLabel, Checkbox } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
+import AlertBar from 'src/components/alertBar';
+import PasswordValidator from 'src/components/basic/PasswordValidator';
+import Cookies from 'js-cookie';
+
 const Login = (props) => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isdisable, setIsdisable] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
+    const [isValidPassword, setIsValidPassword] = useState(false);
 
-    const passwordValidation = (password) => {
-        const re = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/;
-        return re.test(password);
-    };
+    const navigate = useNavigate();
+    const { pageState, dispatch } = useFoodCodeContext();
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
     useEffect(() => {
-        const isValid = userName.length > 0 && passwordValidation(password);
+        const isValid = userName.length > 0 && isValidPassword;
         setIsdisable(!isValid);
-    }, [userName, password]);
+    }, [userName, isValidPassword]);
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post('http://localhost:3100/api/v1/cafe/signin', {
+                email: userName,
+                password,
+            });
+            dispatch({
+                type: 'update-root',
+                payload: {
+                    loginRefresh: true,
+                },
+            });
+            navigate('/');
+        } catch (err) {
+            const message = err?.response?.data?.message ?? 'Something Went Wrong!';
+            dispatch({
+                type: 'create-alert',
+                payload: {
+                    active: true,
+                    type: 'error',
+                    message,
+                },
+            });
+        }
+    };
+    const handleForgotPassword = () => {
+        navigate('/forgot-password');
+    };
     return (
-        <Card sx={{ minWidth: 500, minHeight: 400, padding: '20px', margin: '20px' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
-                <Avatar sx={{ m: 1 }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-            </Box>
-            <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: '40px' }}>
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Username"
-                    fullWidth
-                    value={userName}
-                    onChange={(e) => {
-                        setUserName(e.target.value);
-                    }}
-                />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Password"
-                    fullWidth
-                    value={password}
-                    type={showPassword ? 'text' : 'password'}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end">
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <Button variant="contained" disabled={isdisable}>
-                    Login
-                </Button>
-            </Stack>
-        </Card>
+        <Box>
+            <Card sx={{ minWidth: 500, minHeight: 400, padding: '20px', margin: '20px' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
+                    <Avatar sx={{ m: 1 }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                </Box>
+                <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Email"
+                        fullWidth
+                        value={userName}
+                        onChange={(e) => {
+                            setUserName(e.target.value);
+                        }}
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Password"
+                        fullWidth
+                        value={password}
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end">
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <PasswordValidator password={password} setIsValidPassword={setIsValidPassword} />
+                    <Button onClick={handleSubmit} variant="contained" disabled={isdisable}>
+                        Login
+                    </Button>
+                    <Box>
+                        <Button
+                            sx={{ width: 'max-content', marginLeft: 'auto', marginTop: '30px', display: 'flex', padding: '12px' }}
+                            onClick={handleForgotPassword}
+                        >
+                            <Typography variant="h4" textTransform="capitalize">
+                                Forgot Password
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Card>
+        </Box>
     );
 };
 

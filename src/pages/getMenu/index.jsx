@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Stack, IconButton, Switch } from '@mui/material';
 import MenuItemsByCategories from 'src/layout/MenuItemsByCategories';
+import { WithAuth } from 'src/components/helper/WithAuth';
 
 const GetMenuItem = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -13,4 +14,4 @@ const GetMenuItem = () => {
     );
 };
 
-export default GetMenuItem;
+export default WithAuth(GetMenuItem);

@@ -12,10 +12,10 @@ import UploadImage from 'src/components/UploadImage';
 import RadioGroups from 'src/components/radioGroups';
 import Divider from '@mui/material/Divider';
 import AddonModal from 'src/components/modals/AddOnModal';
-import AlertBar from 'src/components/alertBar';
 import NewAddOnList from 'src/layout/NewAddOn/NewAddOnList';
 import ActionButton from 'src/components/buttons/ActionButton';
 import axios from 'axios';
+import { WithAuth } from 'src/components/helper/WithAuth';
 
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
@@ -66,7 +66,7 @@ const CreateMenu = (props) => {
 
     const goToHomePage = () => {
         //TODO - Function needs to implement after setting up Route Handler to handle back button behaviour.
-        navigate('/');
+        handleClose();
     };
     const handleUpload = (files) => {
         dispatch({
@@ -89,13 +89,16 @@ const CreateMenu = (props) => {
     };
     const handleClose = () => {
         // Will be implemented after setting up router
+        dispatch({
+            type: 'clear-menu-item',
+            payload: {},
+        });
         navigate('/');
     };
     const handleSave = async () => {
         try {
             if (id) {
                 const response = await axios.patch(`http://localhost:3100/api/v1/menus/${id}`, menuItem);
-                console.log(response);
                 dispatch({
                     type: 'create-alert',
                     payload: {
@@ -167,7 +170,6 @@ const CreateMenu = (props) => {
 
     return (
         <Box sx={{ width: '100%', padding: '16px 64px' }}>
-            <AlertBar />
             <Box sx={{ marginBottom: '32px' }}>
                 <BackButton callback={goToHomePage} />
             </Box>
@@ -191,4 +193,4 @@ const CreateMenu = (props) => {
         </Box>
     );
 };
-export default CreateMenu;
+export default WithAuth(CreateMenu);

@@ -36,11 +36,9 @@ const BaseDropdownComponent = (props) => {
         };
         try {
             const response = await axios.post('http://localhost:3100/api/v1/category', requestBody);
-            console.log('Response:', response.data.data.category._id);
             if (handleChangeCallback) {
                 handleChangeCallback(keyName, response.data.data.category._id);
             }
-            console.log(formattedData);
             setFormattedData((data) => [
                 ...data,
                 {

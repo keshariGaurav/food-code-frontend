@@ -10,6 +10,9 @@ export const initialState = {
         message: '',
     },
     refreshAllMenuItems: false,
+    email: '',
+    loginRefresh: false,
+    authenticated: null,
 
     menuItem: {
         name: '',
@@ -35,6 +38,17 @@ export const foodCodeReducer = (state, action) => {
             for (let [key, value] of Object.entries(payload)) {
                 newState.menuItem[key] = value;
             }
+            return newState;
+        }
+        case 'clear-menu-item': {
+            let newState = { ...state };
+            newState.menuItem = {
+                name: '',
+                price: 1,
+                categoryId: null,
+                image: null,
+                addOnItems: [],
+            };
             return newState;
         }
         case 'add-addon-item': {

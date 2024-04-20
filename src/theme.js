@@ -1,4 +1,4 @@
-import { grey } from '@mui/material/colors';
+import { grey, blue } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 import { Button } from '@mui/material';
 
@@ -30,6 +30,18 @@ export let appTheme = createTheme({
             800: grey[800],
             900: grey[900],
         },
+        blue: {
+            100: blue[100],
+            200: blue[200],
+            300: blue[300],
+            400: blue[400],
+            500: blue[500],
+            600: blue[600],
+            700: blue[700],
+            800: blue[800],
+            900: blue[900],
+
+        }
     },
 });
 
@@ -117,6 +129,7 @@ appTheme = createTheme(appTheme, {
                         },
                     },
                 },
+                
             ],
         },
     },

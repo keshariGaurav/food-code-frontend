@@ -3,18 +3,21 @@ import { createTheme } from '@mui/material/styles';
 import { Button } from '@mui/material';
 
 export let appTheme = createTheme({
+    typography: {
+        fontFamily: ['Nunito Sans', 'sans-serif'].join(','),
+    },
     palette: {
         primary: {
-            main: '#95CD41',
+            main: '#FEA1A1',
         },
         secondary: {
-            main: '#EA5C2B',
+            main: '#ECCDB4',
         },
         warning: {
-            main: '#FF7F3F',
+            main: '#F0EDD4',
         },
         info: {
-            main: '#F6D860',
+            main: '#F9FBE7',
         },
         grey: {
             100: grey[100],
@@ -32,8 +35,6 @@ export let appTheme = createTheme({
 
 appTheme = createTheme(appTheme, {
     typography: {
-        fontFamily: '"Nunito Sans", sans-serif',
-        htmlFontSize: 10,
         h1: {
             fontSize: '2.4rem',
             fontWeight: 700,
@@ -76,7 +77,7 @@ appTheme = createTheme(appTheme, {
                 {
                     props: { variant: 'newAddon' },
                     style: {
-                        border: '1px dotted gray',
+                        border: `1px dotted ${grey[300]}`,
                         color: grey[700],
                         '&:hover': {
                             cursor: 'pointer',

@@ -38,10 +38,10 @@ const UploadImage = (props) => {
                     component="span"
                     startIcon={!imageUrl && <AddPhotoAlternateTwoToneIcon />}
                     sx={{
-                        color: 'gray',
-                        borderColor: 'gray',
+                        color: `${theme.palette.grey['400']}`,
+                        borderColor: `${theme.palette.grey['600']}`,
                         '&:hover': {
-                            borderColor: 'black',
+                            borderColor: `${theme.palette.grey['700']}`,
                         },
                         display: 'flex',
                         alignItems: 'center',

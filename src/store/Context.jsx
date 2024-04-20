@@ -13,6 +13,7 @@ export const initialState = {
     email: '',
     loginRefresh: false,
     authenticated: null,
+    navbarHeight: '0px',
 
     menuItem: {
         name: '',

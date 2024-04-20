@@ -10,7 +10,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 import AlertBar from 'src/components/alertBar';
 import PasswordValidator from 'src/components/basic/PasswordValidator';
-import Cookies from 'js-cookie';
+import GridLayout from 'src/layout/GridLayout';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 const Login = (props) => {
     const [userName, setUserName] = useState('');
@@ -60,8 +61,8 @@ const Login = (props) => {
         navigate('/forgot-password');
     };
     return (
-        <Box>
-            <Card sx={{ minWidth: 500, minHeight: 400, padding: '20px', margin: '20px' }}>
+        <GridLayout>
+            <Card sx={{ padding: '20px', marginX: 'auto', maxWidth: '900px' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
                     <Avatar sx={{ m: 1 }}>
                         <LockOutlinedIcon />
@@ -70,7 +71,7 @@ const Login = (props) => {
                         Sign in
                     </Typography>
                 </Box>
-                <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                <Stack direction="column" spacing={4}>
                     <TextField
                         required
                         id="outlined-required"
@@ -117,7 +118,7 @@ const Login = (props) => {
                     </Box>
                 </Stack>
             </Card>
-        </Box>
+        </GridLayout>
     );
 };
 

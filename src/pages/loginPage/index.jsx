@@ -10,7 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 import AlertBar from 'src/components/alertBar';
 import PasswordValidator from 'src/components/basic/PasswordValidator';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const Login = (props) => {
     const [userName, setUserName] = useState('');

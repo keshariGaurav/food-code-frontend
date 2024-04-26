@@ -15,8 +15,6 @@ const GridLayout = (props) => {
     );
 };
 GridLayout.propTypes = {
-    pageState: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
 };
 

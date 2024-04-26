@@ -11,6 +11,7 @@ import ResetPassword from 'src/pages/ResetPassword';
 import Account from 'src/pages/Account';
 import AlertBar from 'src/components/alertBar';
 import ProfileDetails from 'src/pages/ProfileDetails';
+import BankDetails from 'src/pages/BankDetails';
 import axios from 'axios';
 import GetOrder from './getOrder';
 
@@ -63,8 +64,9 @@ const Pages = (props) => {
                         <Route path="/create-menu" element={<CreateMenu />} />
                         <Route path="/create-menu/:id" element={<CreateMenu />} />
                         <Route path="/account" element={<Account />} />
-                        <Route path="/profile-details" element={<ProfileDetails />} />
+                        <Route path="/profile-details/:id" element={<ProfileDetails />} />
                         <Route path="/order" element={<GetOrder />} />
+                        <Route path="/bank-details/:id" element={<BankDetails />} />
                     </Routes>
                 </PageLayout>
             </Box>

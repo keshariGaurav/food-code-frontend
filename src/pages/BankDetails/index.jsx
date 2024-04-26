@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Box, Stack, IconButton, Switch, Typography, Grid, Card, TextField, Button } from '@mui/material';
 import BackToButton from 'src/components/buttons/BackToButton';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
 import GridLayout from 'src/layout/GridLayout';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 
 const BankDetails = (props) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { pageState, dispatch } = useFoodCodeContext();
+    const { id } = useParams();
 
-    const [account, setAccount] = useState({
-        holderName: '',
-        bankName: '',
-        accountNumber: '',
-        ifscCode: '',
-    });
+    const [account, setAccount] = useState(pageState.bankDetails);
 
     const updateField = (key, value) => {
         setAccount((prevAccount) => ({
@@ -25,12 +23,35 @@ const BankDetails = (props) => {
             [key]: value,
         }));
     };
-
-    const handleSubmit = async () => {};
-
     const handleBackButton = () => {
-        navigate('/account');
+        navigate(`/account`);
     };
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.patch(`http://localhost:3100/api/v1/account/${id}`, { bankDetails: account });
+            dispatch({
+                type: 'create-alert',
+                payload: {
+                    active: true,
+                    type: 'success',
+                    message: 'Successfully Updated!',
+                },
+            });
+
+            handleBackButton();
+        } catch (error) {
+            dispatch({
+                type: 'create-alert',
+                payload: {
+                    active: true,
+                    type: 'error',
+                    message: error.message,
+                },
+            });
+        }
+    };
+
     return (
         <GridLayout>
             <Card sx={{ padding: '20px', marginX: 'auto', maxWidth: '900px' }}>
@@ -64,7 +85,7 @@ const BankDetails = (props) => {
                     <TextField
                         required
                         id="outlined-required"
-                        label="Contact Number"
+                        label="Account Number"
                         fullWidth
                         value={account.accountNumber}
                         onChange={(e) => {
@@ -74,7 +95,7 @@ const BankDetails = (props) => {
                     <TextField
                         required
                         id="outlined-required"
-                        label="Address"
+                        label="IFSC Code"
                         fullWidth
                         value={account.ifscCode}
                         onChange={(e) => {

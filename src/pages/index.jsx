@@ -8,12 +8,16 @@ import GetMenuItem from 'src/pages/getMenu';
 import Navbar from 'src/components/navbar';
 import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
+import Account from 'src/pages/Account';
 import AlertBar from 'src/components/alertBar';
+import ProfileDetails from 'src/pages/ProfileDetails';
+import BankDetails from 'src/pages/BankDetails';
 import axios from 'axios';
 import GetOrder from './getOrder';
 
 const Pages = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
+    const authenticated = pageState.authenticated;
     const loginRefresh = pageState.loginRefresh;
 
     const verifyLogin = async () => {
@@ -51,7 +55,7 @@ const Pages = (props) => {
         <BrowserRouter>
             <Box sx={{ width: '100vw', minHeight: '100vh', pt: 8 }}>
                 <AlertBar />
-                <PageLayout>
+                <PageLayout auth={authenticated}>
                     <Routes>
                         <Route path="/" element={<GetMenuItem />} />
                         <Route path="/login" element={<Login />} />
@@ -59,7 +63,10 @@ const Pages = (props) => {
                         <Route path="/reset-password" element={<ResetPassword />} />
                         <Route path="/create-menu" element={<CreateMenu />} />
                         <Route path="/create-menu/:id" element={<CreateMenu />} />
+                        <Route path="/account" element={<Account />} />
+                        <Route path="/profile-details/:id" element={<ProfileDetails />} />
                         <Route path="/order" element={<GetOrder />} />
+                        <Route path="/bank-details/:id" element={<BankDetails />} />
                     </Routes>
                 </PageLayout>
             </Box>
@@ -67,16 +74,17 @@ const Pages = (props) => {
     );
 };
 
-const PageLayout = ({ children }) => {
+const PageLayout = (props) => {
     const location = useLocation();
+    const auth = props.auth;
     const navBarURL = ['/login', '/forgot-password', '/reset-password'];
     const showNavbar = !navBarURL.includes(location.pathname);
 
     return (
-        <div>
-            {showNavbar && <Navbar />}
-            {children}
-        </div>
+        <>
+            <Navbar auth={auth} />
+            {props.children}
+        </>
     );
 };
 export default Pages;

@@ -6,6 +6,7 @@ import { Card, Stack, Box, TextField, Typography, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import AlertBar from 'src/components/alertBar';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
+import GridLayout from 'src/layout/GridLayout';
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState('');
@@ -52,44 +53,46 @@ const ForgotPassword = (props) => {
         setEmail('');
     };
     return (
-        <Card sx={{ maxWidth: '640px', height: 'max-content', paddingY: '80px', marginLeft: 'auto', marginRight: 'auto' }}>
-            <AlertBar />
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
-                <Typography component="h1" variant="h3">
-                    Reset Password
-                </Typography>
-            </Box>
-            <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Email"
-                    fullWidth
-                    value={email}
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-                    }}
-                />
-
-                <Button onClick={handleSubmit} variant="contained" disabled={disabled}>
-                    <Typography component="h1" variant="h4">
-                        {disabled ? 'Sending Email...' : 'Reset Your Password'}
+        <GridLayout>
+            <Card sx={{ maxWidth: '900px', height: 'max-content', paddingY: '80px', marginLeft: 'auto', marginRight: 'auto' }}>
+                <AlertBar />
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+                    <Typography component="h1" variant="h3">
+                        Reset Password
                     </Typography>
-                </Button>
-                <Box>
-                    <Button
-                        sx={{ width: '60px', marginLeft: 'auto', marginTop: '30px', display: 'flex', padding: '12px' }}
-                        onClick={() => {
-                            navigate('/login');
+                </Box>
+                <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Email"
+                        fullWidth
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
                         }}
-                    >
-                        <Typography variant="h2" textTransform="capitalize">
-                            Login
+                    />
+
+                    <Button onClick={handleSubmit} variant="contained" disabled={disabled}>
+                        <Typography component="h1" variant="h4">
+                            {disabled ? 'Sending Email...' : 'Reset Your Password'}
                         </Typography>
                     </Button>
-                </Box>
-            </Stack>
-        </Card>
+                    <Box>
+                        <Button
+                            sx={{ width: '60px', marginLeft: 'auto', marginTop: '30px', display: 'flex', padding: '12px' }}
+                            onClick={() => {
+                                navigate('/login');
+                            }}
+                        >
+                            <Typography variant="h2" textTransform="capitalize">
+                                Login
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Card>
+        </GridLayout>
     );
 };
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context.jsx';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 
@@ -14,11 +15,60 @@ const StyledLink = styled(Link)(({ theme }) => ({
     },
 }));
 
-const Navbar = () => {
+const Navbar = (props) => {
     const theme = useTheme();
+    const location = useLocation();
+    const componentRef = useRef(null);
+    const { pageState, dispatch } = useFoodCodeContext();
+
+    useEffect(() => {
+        if (componentRef?.current) {
+            const height = componentRef.current.getBoundingClientRect().height;
+            dispatch({
+                type: 'update-root',
+                payload: {
+                    navbarHeight: height,
+                },
+            });
+        }
+    }, []);
+
+    const auth = props.auth;
+    let routes = [
+        {
+            name: 'Orders',
+            url: '/orders',
+        },
+        {
+            name: 'Menu',
+            url: '/',
+        },
+        ,
+        {
+            name: 'Account',
+            url: '/account',
+        },
+    ];
+    if (!auth) {
+        if (location.pathname === 'login') {
+            routes = [
+                {
+                    name: 'Login',
+                    url: '/login',
+                },
+            ];
+        } else {
+            routes = [
+                {
+                    name: 'Forgot Password',
+                    url: 'forgot-password',
+                },
+            ];
+        }
+    }
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" ref={componentRef}>
             <CssBaseline />
             <Toolbar>
                 <Typography
@@ -29,7 +79,7 @@ const Navbar = () => {
                         cursor: 'pointer',
                     }}
                 >
-                    AG
+                    BaniyaByte Café
                 </Typography>
                 <Box
                     sx={{
@@ -38,15 +88,13 @@ const Navbar = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <StyledLink to="/orders" theme={theme}>
-                        <Typography variant="h2">Orders</Typography>
-                    </StyledLink>
-                    <StyledLink to="/" theme={theme} sx={{ fontSize: '20px' }}>
-                        <Typography variant="h2">Menu</Typography>
-                    </StyledLink>
-                    <StyledLink to="/account" theme={theme} sx={{ fontSize: '20px' }}>
-                        <Typography variant="h2">Account</Typography>
-                    </StyledLink>
+                    {routes.map((route, idx) => {
+                        return (
+                            <StyledLink key={idx} to={route.url} theme={theme}>
+                                <Typography variant="h2">{route.name}</Typography>
+                            </StyledLink>
+                        );
+                    })}
                 </Box>
             </Toolbar>
         </AppBar>

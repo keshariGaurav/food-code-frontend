@@ -13,6 +13,7 @@ export const initialState = {
     email: '',
     loginRefresh: false,
     authenticated: null,
+    navbarHeight: '0px',
 
     menuItem: {
         name: '',
@@ -20,6 +21,19 @@ export const initialState = {
         categoryId: null,
         image: null,
         addOnItems: [],
+    },
+    bankDetails: {
+        holderName: '',
+        bankName: '',
+        accountNumber: '',
+        ifscCode: '',
+    },
+    profileDetails: {
+        cafeName: '',
+        ownerName: '',
+        contactNumber: '',
+        email: '',
+        address: '',
     },
 };
 export const foodCodeReducer = (state, action) => {
@@ -62,6 +76,22 @@ export const foodCodeReducer = (state, action) => {
             let newState = { ...state };
             for (let [key, value] of Object.entries(payload)) {
                 newState.alertBarContent[key] = value;
+            }
+            return newState;
+        }
+        case 'update-bank-details': {
+            const payload = action.payload;
+            let newState = { ...state };
+            for (let [key, value] of Object.entries(payload)) {
+                newState.bankDetails[key] = value;
+            }
+            return newState;
+        }
+        case 'update-profile-details': {
+            const payload = action.payload;
+            let newState = { ...state };
+            for (let [key, value] of Object.entries(payload)) {
+                newState.profileDetails[key] = value;
             }
             return newState;
         }

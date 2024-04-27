@@ -6,6 +6,7 @@ import { Card, Stack, Box, TextField, Typography, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
 import PasswordValidator from 'src/components/basic/PasswordValidator';
+import GridLayout from 'src/layout/GridLayout';
 
 const ResetPassword = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
@@ -60,63 +61,65 @@ const ResetPassword = (props) => {
         setDisabled(false);
     };
     return (
-        <Card sx={{ maxWidth: '640px', height: 'max-content', paddingY: '80px', marginLeft: 'auto', marginRight: 'auto' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
-                <Typography component="h1" variant="h3">
-                    Enter Password Reset OTP
-                </Typography>
-            </Box>
-            <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Password Reset OTP"
-                    fullWidth
-                    value={otp}
-                    onChange={(e) => {
-                        setOtp(e.target.value);
-                    }}
-                />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Password"
-                    fullWidth
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
-                />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Confirm Password"
-                    fullWidth
-                    value={confirmPassword}
-                    onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                    }}
-                />
-                <PasswordValidator password={password} setIsValidPassword={setIsValidPassword} confirmPassword={confirmPassword} />
-                <Button onClick={handleSubmit} variant="contained" disabled={disabled}>
-                    <Typography component="h1" variant="h4">
-                        Update Your Password
+        <GridLayout>
+            <Card sx={{ maxWidth: '900px', paddingY: '80px', marginX: 'auto' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+                    <Typography component="h1" variant="h3">
+                        Enter Password Reset OTP
                     </Typography>
-                </Button>
-                <Box>
-                    <Button
-                        sx={{ width: '60px', marginLeft: 'auto', marginTop: '30px', display: 'flex', padding: '12px' }}
-                        onClick={() => {
-                            navigate('/login');
+                </Box>
+                <Stack direction="column" spacing={4} sx={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Password Reset OTP"
+                        fullWidth
+                        value={otp}
+                        onChange={(e) => {
+                            setOtp(e.target.value);
                         }}
-                    >
-                        <Typography variant="h2" textTransform="capitalize">
-                            Login
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Password"
+                        fullWidth
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Confirm Password"
+                        fullWidth
+                        value={confirmPassword}
+                        onChange={(e) => {
+                            setConfirmPassword(e.target.value);
+                        }}
+                    />
+                    <PasswordValidator password={password} setIsValidPassword={setIsValidPassword} confirmPassword={confirmPassword} />
+                    <Button onClick={handleSubmit} variant="contained" disabled={disabled}>
+                        <Typography component="h1" variant="h4">
+                            Update Your Password
                         </Typography>
                     </Button>
-                </Box>
-            </Stack>
-        </Card>
+                    <Box>
+                        <Button
+                            sx={{ width: '60px', marginLeft: 'auto', marginTop: '30px', display: 'flex', padding: '12px' }}
+                            onClick={() => {
+                                navigate('/login');
+                            }}
+                        >
+                            <Typography variant="h2" textTransform="capitalize">
+                                Login
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Card>
+        </GridLayout>
     );
 };
 

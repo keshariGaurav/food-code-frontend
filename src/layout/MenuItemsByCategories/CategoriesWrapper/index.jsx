@@ -8,11 +8,7 @@ const CategoriesWrapper = (props) => {
     const setIsLoading = props.setIsLoading;
     return (
         <>
-            <Box
-                width="70%"
-                backgroundColor="white"
-                sx={{ border: '1px solid #d3d3d3', marginLeft: 'auto', marginRight: 'auto', padding: '24px 64px' }}
-            >
+            <Box backgroundColor="white" sx={{ border: '1px solid #d3d3d3', marginLeft: 'auto', marginRight: 'auto', padding: '24px 64px' }}>
                 <Stack spacing={2}>
                     <Typography variant="h2">{category.category.name}</Typography>
                     {menus.map((menu, idx) => {

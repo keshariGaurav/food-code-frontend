@@ -37,7 +37,7 @@ const Navbar = (props) => {
     let routes = [
         {
             name: 'Orders',
-            url: '/orders',
+            url: '/order',
         },
         {
             name: 'Menu',

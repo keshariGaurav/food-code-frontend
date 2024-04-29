@@ -5,6 +5,7 @@ import BankAccountWrapper from 'src/layout/AccountWrapper/BankAccountWrapper';
 import { Card, Stack, Box, TextField, CircularProgress } from '@mui/material';
 import { useApi } from 'src/hooks/useApi';
 import FoodCodeProvider, { useFoodCodeContext } from 'src/store/Context';
+import RestaurantWrapper from './RestaurantWrapper';
 
 const AccountWrapper = (props) => {
     const [cafeData, setCafeData] = useState([]);
@@ -42,6 +43,7 @@ const AccountWrapper = (props) => {
         <Stack spacing={4}>
             <ProfileWrapper id={cafeData._id} data={cafeData} />
             <BankAccountWrapper id={cafeData._id} data={cafeData?.bankDetails} />
+            <RestaurantWrapper />
         </Stack>
     );
 };

@@ -14,6 +14,7 @@ import ProfileDetails from 'src/pages/ProfileDetails';
 import BankDetails from 'src/pages/BankDetails';
 import axios from 'axios';
 import GetOrder from './getOrder';
+import RestaurantInfo from './RestaurantInfo';
 
 const Pages = (props) => {
     const { pageState, dispatch } = useFoodCodeContext();
@@ -67,6 +68,7 @@ const Pages = (props) => {
                         <Route path="/profile-details/:id" element={<ProfileDetails />} />
                         <Route path="/order" element={<GetOrder />} />
                         <Route path="/bank-details/:id" element={<BankDetails />} />
+                        <Route path="/resturant-info" element={<RestaurantInfo />} />
                     </Routes>
                 </PageLayout>
             </Box>

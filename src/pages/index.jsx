@@ -66,7 +66,7 @@ const Pages = (props) => {
                         <Route path="/create-menu/:id" element={<CreateMenu />} />
                         <Route path="/account" element={<Account />} />
                         <Route path="/profile-details/:id" element={<ProfileDetails />} />
-                        <Route path="/order" element={<GetOrder />} />
+                        <Route path="/orders" element={<GetOrder />} />
                         <Route path="/bank-details/:id" element={<BankDetails />} />
                         <Route path="/resturant-info" element={<RestaurantInfo />} />
                     </Routes>

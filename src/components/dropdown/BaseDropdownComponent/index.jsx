@@ -72,21 +72,21 @@ const BaseDropdownComponent = (props) => {
                         <Typography variant="h3">{item.label}</Typography>
                     </MenuItem>
                 ))}
-                <Box sx={{ mt: 2, ml: 2 }}>
-                    <Stack direction="row" spacing={4}>
-                        <TextField
-                            label="Add a category"
-                            variant="outlined"
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            onKeyDown={(e) => e.stopPropagation()}
-                        />
-                        <Button variant="contained" onClick={handleButtonClick}>
-                            Add
-                        </Button>
-                    </Stack>
-                </Box>
             </Select>
+            <Box sx={{ mt: 2, ml: 2 }}>
+                <Stack direction="row" spacing={4}>
+                    <TextField
+                        label="Add a category"
+                        variant="outlined"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        onKeyDown={(e) => e.stopPropagation()}
+                    />
+                    <Button variant="contained" onClick={handleButtonClick}>
+                        Add
+                    </Button>
+                </Stack>
+            </Box>
         </FormControl>
     );
 };

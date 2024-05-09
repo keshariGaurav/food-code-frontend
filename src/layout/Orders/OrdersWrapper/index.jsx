@@ -10,6 +10,7 @@ const OrdersWrapper = (props) => {
     const setOrders = props.setOrders;
     const { totalAmount, tableNumber, status, orderDate, orderNumber, menuItems } = order;
     const diner = order.dinerId;
+    console.log(menuItems);
 
     const formatDate = (orderDate) => {
         const date = new Date(orderDate);
@@ -29,6 +30,9 @@ const OrdersWrapper = (props) => {
                 .toUpperCase();
         return formattedDate;
     };
+    if (!order) {
+        return <></>;
+    }
     return (
         <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
             <Stack spacing={1} sx={{ width: '100%' }}>
@@ -42,7 +46,7 @@ const OrdersWrapper = (props) => {
                 </Stack>
                 <Stack>
                     <Typography variant="h6" color="grey">
-                        {diner.name}
+                        {diner?.name}
                     </Typography>
                     <Typography variant="h6" color="grey">
                         {formatDate(orderDate)}
@@ -51,11 +55,31 @@ const OrdersWrapper = (props) => {
                 <Divider sx={{ marginTop: '15px' }} variant="middle" />
                 <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
                     <Stack>
-                        {menuItems.map((menuItem, idx) => {
+                        {menuItems?.map((menuItem, idx) => {
                             return (
-                                <Typography variant="h5" key={idx}>
-                                    {menuItem.menuItemId.name} X {menuItem.quantity}
-                                </Typography>
+                                <Box marginBottom={2}>
+                                    <Typography variant="h3" key={idx}>
+                                        {menuItem?.menuItemId?.name} X {menuItem?.quantity}
+                                    </Typography>
+                                    {menuItem?.addOnItems?.map((addOn, idx) => {
+                                        return (
+                                            <Box marginBottom={1} marginTop={1}>
+                                                <Typography variant="h4" key={idx} sx={{ textDecoration: 'underline' }}>
+                                                    {addOn?.addOnItemName}
+                                                </Typography>
+                                                {addOn?.selectedItems?.map((item, idx) => {
+                                                    return (
+                                                        <Box>
+                                                            <Typography variant="h5" key={idx}>
+                                                                {item.name}
+                                                            </Typography>
+                                                        </Box>
+                                                    );
+                                                })}
+                                            </Box>
+                                        );
+                                    })}
+                                </Box>
                             );
                         })}
                     </Stack>

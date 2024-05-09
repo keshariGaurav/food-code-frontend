@@ -94,6 +94,7 @@ const OrderStatusButton = (props) => {
             onClick={handleClick}
             disabled={buttonState.disabled}
             sx={{
+                height: '32px',
                 color:
                     buttonState.color === 'primary'
                         ? `${theme.palette.blue['800']}`

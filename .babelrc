@@ -1,0 +1,9 @@
+// In your Babel configuration
+{
+  "presets": [
+    ["@babel/preset-react", {
+      "runtime": "automatic" // This enables the new JSX transform
+    }],
+    "@babel/preset-env"
+  ]
+}

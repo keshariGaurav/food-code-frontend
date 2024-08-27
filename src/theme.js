@@ -1,4 +1,4 @@
-import { grey, blue , green, common} from '@mui/material/colors';
+import { grey, blue, green, common } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 import { Button } from '@mui/material';
 
@@ -8,21 +8,25 @@ export let appTheme = createTheme({
     },
     palette: {
         primary: {
-            main: '#FEA1A1',
+            main: '#B5C18E',
+            contrastText: '#2E2E2E',
         },
         secondary: {
-            main: '#ECCDB4',
+            main: '#EADBC8',
+            contrastText: '#4A4A4A',
         },
         warning: {
-            main: '#F0EDD4',
+            main: '#C7B7A3',
+            contrastText: '#FFFFFF',
         },
         info: {
-            main: '#F9FBE7',
+            main: '#F1F1F1',
+            contrastText: '#3B3B3B',
         },
-        common : {
+        common: {
             white: common.white,
         },
-        green : {
+        green: {
             100: green[100],
             200: green[200],
             300: green[300],
@@ -54,35 +58,34 @@ export let appTheme = createTheme({
             700: blue[700],
             800: blue[800],
             900: blue[900],
-
-        }
+        },
     },
 });
 
 appTheme = createTheme(appTheme, {
     typography: {
         h1: {
-            fontSize: '2.4rem',
+            fontSize: '1.6rem',
             fontWeight: 700,
         },
         h2: {
-            fontSize: '2.0rem',
+            fontSize: '1.2rem',
             fontWeight: 500,
         },
         h3: {
-            fontSize: '1.8rem',
+            fontSize: '1rem',
             fontWeight: 400,
         },
         h3: {
-            fontSize: '1.6rem',
+            fontSize: '0.8rem',
             fontWeight: 400,
         },
         h4: {
-            fontSize: '1.4rem',
+            fontSize: '0.7rem',
             fontWeight: 200,
         },
         h5: {
-            fontSize: '1.2rem',
+            fontSize: '0.6rem',
             fontWeight: 400,
         },
     },
@@ -143,7 +146,6 @@ appTheme = createTheme(appTheme, {
                         },
                     },
                 },
-                
             ],
         },
     },

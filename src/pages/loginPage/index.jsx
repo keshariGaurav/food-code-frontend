@@ -22,6 +22,10 @@ const Login = (props) => {
 
     const navigate = useNavigate();
     const { pageState, dispatch } = useFoodCodeContext();
+    const authenticated = pageState.authenticated;
+    if (authenticated) {
+        navigate('/');
+    }
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
